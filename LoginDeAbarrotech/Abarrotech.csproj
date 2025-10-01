@@ -108,6 +108,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ConexionBD.cs" />
+    <Compile Include="PreguntasArea.xaml.cs">
+      <DependentUpon>PreguntasArea.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Usuario.cs" />
     <Page Include="LoginAbarrotech.xaml">
       <SubType>Designer</SubType>
@@ -120,6 +123,10 @@
     <Compile Include="LoginAbarrotech.xaml.cs">
       <DependentUpon>LoginAbarrotech.xaml</DependentUpon>
     </Compile>
+    <Page Include="PreguntasArea.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
