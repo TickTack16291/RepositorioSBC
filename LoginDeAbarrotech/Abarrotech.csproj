@@ -108,10 +108,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ConexionBD.cs" />
-    <Compile Include="Producto.cs" />
-    <Compile Include="RegistroProductos.xaml.cs">
-      <DependentUpon>RegistroProductos.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Usuario.cs" />
     <Page Include="LoginAbarrotech.xaml">
       <SubType>Designer</SubType>
@@ -124,19 +120,8 @@
     <Compile Include="LoginAbarrotech.xaml.cs">
       <DependentUpon>LoginAbarrotech.xaml</DependentUpon>
     </Compile>
-    <Page Include="MenuOperaciones.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="RegistroProductos.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MenuOperaciones.xaml.cs">
-      <DependentUpon>MenuOperaciones.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -53,9 +53,9 @@ namespace LoginDeAbarrotech
                 {
                     // Aqui debe abrir un el menu de operciones
 
-                    MenuOperaciones menuoperaciones = new MenuOperaciones();
+                    
 
-                    menuoperaciones.Show();
+                    MessageBox.Show("Abrir ventana de operaciones");
                     this.Hide();
                 }
                 else
