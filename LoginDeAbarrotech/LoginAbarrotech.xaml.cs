@@ -73,9 +73,8 @@ namespace LoginDeAbarrotech
 
         private void btn_Cerrar_Click(object sender, RoutedEventArgs e)
         {
-            PreguntasArea preguntas = new PreguntasArea();
-            preguntas.Show();
-            //this.Close();
+           
+            this.Close();
         }
 
         private void btnRegistrarUsuario_Click(object sender, RoutedEventArgs e)
