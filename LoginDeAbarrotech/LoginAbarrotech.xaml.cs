@@ -52,11 +52,9 @@ namespace LoginDeAbarrotech
                 if (aux)
                 {
                     // Aqui debe abrir un el menu de operciones
-
-                    
-
-                    MessageBox.Show("Abrir ventana de operaciones");
-                    this.Hide();
+                    PreguntasArea ventanaPreguntas = new PreguntasArea();
+                    this.Close();
+                    ventanaPreguntas.Show();
                 }
                 else
                 {

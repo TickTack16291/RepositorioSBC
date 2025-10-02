@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Reglas;
 
 namespace LoginDeAbarrotech
 {
@@ -24,8 +25,11 @@ namespace LoginDeAbarrotech
             InitializeComponent();
             InitializeQuestions();
         }
+      
         private List<ComboBox> answerComboBoxes = new List<ComboBox>();
         private const int totalQuestions = 10;
+
+        public string[] respuestas = new string[10];
 
         // Preguntas y opciones de ejemplo
         private string[] questions = {
@@ -42,7 +46,7 @@ namespace LoginDeAbarrotech
         };
 
         private string[][] options = {
-           new string[] { "Seleccione...", "Matemáticas, Física, Química", "Biología, Química", "Historia, Filosofía, Literatura", "Sociología, Economía, Derecho", "Arte, Música, Teatro" },
+           new string[] { "Seleccione...", " a) Matemáticas, Física, Química", "b) Biología, Química", "c) Historia, Filosofía, Literatura", "d) Sociología, Economía, Derecho", "e) Arte, Música, Teatro" },
            new string[] { "Seleccione...", "Resolver problemas, armar/desarmar cosas", "Leer, Escribir, Reflexionar", "Ayudar, aconsejar, enseñar", "Dibujar, pintar, crear musica", "Actividades al aire libre, cultivar, criar y cuidad animales", "Hacer experimentos, entender a la naturaleza" },
            new string[] { "Seleccione...", "Máquinas, sistemas, tecnología", "Personas y sus relaciones", "Ideas y conceptos", "Expresiones creativas", "Naturaleza, animales, plantas", "Sustancias, Materiales, Experimentos" },
            new string[] { "Seleccione...", "Innovar, resolver problemas técnicos, Conocer las relaciones materiales", "Impactar en la sociedad, leyes, políticas", "Comprender la cultura y el pensamiento", "Cuidar la salud y bienestar", "Expresar la creatividad", "Trabajar con la tierra y alimentos", "Entender el funcionamiento del mundo y de la naturaleza" },
@@ -144,8 +148,21 @@ namespace LoginDeAbarrotech
             for (int i = 0; i < answerComboBoxes.Count; i++)
             {
                 string answer = answerComboBoxes[i].SelectedItem?.ToString() ?? "Sin respuesta";
-                answers.Add($"Pregunta {i + 1}: {answer}");
+                answers.Add(answer);
             }
+
+            for (int i = 0; i < totalQuestions; i++)///Desde la pregunta 1 hasta diez pero con indice 0
+            {
+                int selectedIndex = answerComboBoxes[i].SelectedIndex;///obtener el indice seleccionado
+                // Si seleccionó una opción válida (no "Seleccione...")
+                if (selectedIndex > 0)///Si va arriba de 0
+                {
+                    // Convertir el índice a letra: 1 -> 'a', 2 -> 'b', etc.
+                    respuestas[i] = ((char)('a' + (selectedIndex - 1))).ToString(); // a + 0 se queda en a, a+1 se vuelve b y asi sucesivamente con casteo de char, ya se valido que no sea 0
+                }
+            }
+            var resultado1 = MotorOrientacionVocacional.DeterminarAreaEnfasis(respuestas[0], respuestas[1], respuestas[2], respuestas[3], respuestas[4], respuestas[5], respuestas[6], respuestas[7], respuestas[8], respuestas[9]);
+            MessageBox.Show(resultado1.AreaGanadora);
 
             // Mostrar resultados
             string resultMessage = "¡Respuestas enviadas correctamente!\n\n" + string.Join("\n", answers);

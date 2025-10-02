@@ -56,6 +56,15 @@
     <Reference Include="MySql.Data, Version=9.4.0.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.9.4.0\lib\net462\MySql.Data.dll</HintPath>
     </Reference>
+    <Reference Include="NRules, Version=1.0.3.0, Culture=neutral, PublicKeyToken=8ad544355a4a2176, processorArchitecture=MSIL">
+      <HintPath>..\packages\NRules.Runtime.1.0.3\lib\netstandard2.0\NRules.dll</HintPath>
+    </Reference>
+    <Reference Include="NRules.Fluent, Version=1.0.3.0, Culture=neutral, PublicKeyToken=8ad544355a4a2176, processorArchitecture=MSIL">
+      <HintPath>..\packages\NRules.Fluent.1.0.3\lib\netstandard2.0\NRules.Fluent.dll</HintPath>
+    </Reference>
+    <Reference Include="NRules.RuleModel, Version=1.0.3.0, Culture=neutral, PublicKeyToken=8ad544355a4a2176, processorArchitecture=MSIL">
+      <HintPath>..\packages\NRules.RuleModel.1.0.3\lib\netstandard2.0\NRules.RuleModel.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -111,6 +120,7 @@
     <Compile Include="PreguntasArea.xaml.cs">
       <DependentUpon>PreguntasArea.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Program.cs" />
     <Compile Include="Usuario.cs" />
     <Page Include="LoginAbarrotech.xaml">
       <SubType>Designer</SubType>

@@ -17,7 +17,7 @@ namespace LoginDeAbarrotech
         private string conexionString =
             "Server=localhost;" +
             "Port=3306;" +
-            "Database=abarrotech_v2;" +
+            "Database=sistemaexperto_orientacion;" +
             "Uid=root;" +
             "Pwd=;";
 
