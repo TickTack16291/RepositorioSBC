@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Reglas;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,71 +11,45 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Reglas;
 
 namespace LoginDeAbarrotech
 {
     /// <summary>
-    /// Lógica de interacción para PreguntasArea.xaml
+    /// Lógica de interacción para PreguntasIngenierias.xaml
     /// </summary>
-    public partial class PreguntasArea : Window
+    public partial class PreguntasIngenierias : Page
     {
-        public PreguntasArea()
+        public PreguntasIngenierias()
         {
             InitializeComponent();
             InitializeQuestions();
         }
-
-        private void NavegarAPreguntasIngenierias()
-        {
-            try
-            {
-                // 1. Crea la nueva página
-                PreguntasIngenierias nuevaPagina = new PreguntasIngenierias();
-
-                // 2. Reemplaza el contenido completo
-                this.Content = nuevaPagina; // ← Asigna la página, no solo su Content
-
-                // 3. Opcional: Limpia recursos anteriores
-                GC.Collect();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al cambiar página: {ex.Message}");
-            }
-        }
-
         private List<ComboBox> answerComboBoxes = new List<ComboBox>();
-        private const int totalQuestions = 10;
+        private const int totalQuestions = 7;
 
-        public string[] respuestas = new string[10];
+        public string[] respuestas = new string[7];
 
         // Preguntas y opciones de ejemplo
         private string[] questions = {
-            "Pregunta 1: ¿Qué asignaturas disfrutas más en la preparatoria?",
-            "Pregunta 2: ¿Qué tipo de actividades disfrutas más en tu tiempo libre?",
-            "Pregunta 3: ¿Prefieres trabajar con…?",
-            "Pregunta 4 ¿Qué valoras más en un trabajo?",
-            "Pregunta 5 ¿Cuál de estas frases resuena más contigo?",
-            "Pregunta 6 Si pudieras elegir un proyecto de vida, sería…",
-            "Pregunta 7 ¿Qué tipo de problemas disfrutas resolver más?",
-            "Pregunta 8 ¿Qué ambiente de aprendizaje prefieres?",
-            "Pregunta 9 ¿En qué te visualizas trabajando en el futuro?",
-            "Pregunta 10 Si tuvieras que elegir un rol en un equipo de trabajo, serías…"
-        };
+         "Pregunta 1: ¿Qué tipo de sistemas te interesa más diseñar o mejorar?",
+         "Pregunta 2: ¿En qué ambiente prefieres trabajar?",
+         "Pregunta 3: ¿Qué habilidad te sientes más cómodo desarrollando?",
+         "Pregunta 4: ¿Qué tipo de problemas te gustaría resolver?",
+         "Pregunta 5: ¿Con qué herramientas te gustaría trabajar?",
+         "Pregunta 6: ¿Qué materia te parece más interesante?",
+         "Pregunta 7: ¿Qué proyecto te motivaría más?"
+         };
 
         private string[][] options = {
-       new string[] { "Seleccione...", "a) Matemáticas, Física, Química", "b) Biología, Química", "c) Historia, Filosofía, Literatura", "d) Sociología, Economía, Derecho", "e) Arte, Música, Teatro" },
-       new string[] { "Seleccione...", "a) Resolver problemas, armar/desarmar cosas", "b) Leer, Escribir, Reflexionar", "c) Ayudar, aconsejar, enseñar", "d) Dibujar, pintar, crear musica", "e) Actividades al aire libre, cultivar, criar y cuidad animales", "f) Hacer experimentos, entender a la naturaleza" },
-       new string[] { "Seleccione...", "a) Máquinas, sistemas, tecnología", "b) Personas y sus relaciones", "c) Ideas y conceptos", "d) Expresiones creativas", "e) Naturaleza, animales, plantas", "f) Sustancias, Materiales, Experimentos" },
-       new string[] { "Seleccione...", "a) Innovar, resolver problemas técnicos, Conocer las relaciones materiales", "b) Impactar en la sociedad, leyes, políticas", "c) Comprender la cultura y el pensamiento", "d) Cuidar la salud y bienestar", "e) Expresar la creatividad", "f) Trabajar con la tierra y alimentos", "g) Entender el funcionamiento del mundo y de la naturaleza" },
-       new string[] { "Seleccione...", "a) Me gusta construir, programar o diseñar soluciones técnicas", "b) Me interesa entender y ayudar a las personas en sociedad", "c) Quiero comprender la cultura, la historia y el pensamiento", "d) Me motiva mejorar la salud de las personas", "e) Necesito expresarme de forma artística", "f) Quiero trabajar con la naturaleza y el campo", "g) Me gusta entender el porqué de los fenómenos y eventos que suceden a nuestro alrededor" },
-      new string[] { "Seleccione...", "a) Crear un invento, programa o empresa tecnológica", "b) Resolver problemas sociales, legales o económicos", "c) Escribir un libro o investigar sobre cultura", "d) Ser médico, enfermero o terapeuta", "e) Ser artista, músico o diseñador", "f) Ser agricultor, veterinario o ambientalista", "g) Ser físico o químico, contribuir en la creación de hipótesis de ciencia" },
-      new string[] { "Seleccione...", "a) Técnicos o lógicos", "b) Sociales o políticos", "c) Filosóficos o culturales", "d) De salud o bienestar", "e) Creativos y artísticos", "f) Naturales y ambientales", "g) Científicos ye Innovadores" },
-      new string[] { "Seleccione...", "a) Industria, computadoras", "b) Biblioteca, investigación documental", "c) Prácticas comunitarias", "d) Escenarios creativos (teatro, música, diseño)", "e) Campos de cultivo, naturaleza", "f) Laboratorios, taller, Escenarios de campo" },
-      new string[] { "Seleccione...", "a) Diseñando soluciones técnicas o tecnológicas", "b) Investigando o resolviendo problemas sociales", "c) Enseñando, escribiendo o investigando ideas", "d) Tratando pacientes o investigando enfermedades", "e) Creando arte, diseño o música", "f) Cultivando, investigando plantas o cuidando animales", "g) Experimentando, Investigando, Crear nuevos componentes" },
-      new string[] { "Seleccione...", "a) El que diseña o construye", "b) El que organiza, media y negocia", "c) El que reflexiona y propone ideas", "d) El que cuida la salud y bienestar", "e) El que inspira con creatividad", "f) El que conecta con la naturaleza", "g) El que conecta con el entendimiento del entorno" }
+    new string[] { "Seleccione...", "a) Sistemas mecánicos y robots", "b) Sistemas de software y aplicaciones", "c) Estructuras y edificios", "d) Procesos industriales y de producción", "e) Procesos de producción de alimentos", "f) Procesos de extracción y tratamiento de minerales", "g) Desarrollo de nuevos materiales", "h) Sistemas de comunicación y redes", "i) Procesos biológicos y biotecnológicos" },
+    new string[] { "Seleccione...", "a) Laboratorio de robótica o automatización", "b) Oficina con computadoras", "c) Obras de construcción", "d) Plantas industriales", "e) Plantas procesadoras de alimentos", "f) Minas o plantas metalúrgicas", "g) Laboratorio de materiales", "h) Centros de telecomunicaciones", "i) Laboratorio biotecnológico" },
+    new string[] { "Seleccione...", "a) Programación de robots y sistemas automáticos", "b) Programación de software", "c) Diseño estructural y planos", "d) Optimización de procesos y gestión", "e) Control de calidad y procesos alimentarios", "f) Análisis de minerales y metales", "g) Análisis y síntesis de materiales", "h) Diseño de redes y comunicaciones", "i) Manipulación de organismos y bioprocesos" },
+    new string[] { "Seleccione...", "a) Automatización de tareas repetitivas", "b) Creación de algoritmos eficientes", "c) Diseño de infraestructuras resistentes", "d) Mejora de la eficiencia en producción", "e) Conservación y procesamiento de alimentos", "f) Extracción y purificación de metales", "g) Desarrollo de materiales más ligeros o resistentes", "h) Mejora de la comunicación inalámbrica", "i) Desarrollo de productos biológicos" },
+    new string[] { "Seleccione...", "a) Robots y sensores", "b) Lenguajes de programación", "c) Software de diseño CAD y equipos de construcción", "d) Software de simulación y gestión", "e) Equipos de procesamiento de alimentos", "f) Equipos de minería y metalurgia", "g) Microscopios y equipos de prueba de materiales", "h) Antenas y equipos de comunicación", "i) Reactores biológicos y equipos de laboratorio" },
+    new string[] { "Seleccione...", "a) Electrónica y control", "b) Algoritmos y estructuras de datos", "c) Mecánica de materiales", "d) Investigación de operaciones", "e) Química de alimentos", "f) Mineralogía", "g) Ciencia de materiales", "h) Teoría de las comunicaciones", "i) Biología molecular" },
+    new string[] { "Seleccione...", "a) Construir un robot autónomo", "b) Desarrollar una aplicación móvil", "c) Diseñar un puente o edificio", "d) Mejorar la logística de una empresa", "e) Crear un nuevo producto alimenticio", "f) Optimizar la extracción de un metal", "g) Crear un material biodegradable", "h) Diseñar una red de fibra óptica", "i) Desarrollar un biocombustible" }
 };
 
         private void InitializeQuestions()
@@ -86,7 +61,7 @@ namespace LoginDeAbarrotech
                 {
                     BorderBrush = new SolidColorBrush(Color.FromRgb(189, 195, 199)),
                     BorderThickness = new Thickness(1),
-                    Background = new SolidColorBrush(Color.FromRgb(248, 249, 250)),
+                    Background = new SolidColorBrush(Color.FromRgb(69, 213, 167)),
                     CornerRadius = new CornerRadius(4),
                     Margin = new Thickness(0, 6, 0, 6),
                     Padding = new Thickness(15)
@@ -162,8 +137,6 @@ namespace LoginDeAbarrotech
                 return;
             }
 
-           
-
             // Recopilar respuestas
             List<string> answers = new List<string>();
             for (int i = 0; i < answerComboBoxes.Count; i++)
@@ -190,7 +163,7 @@ namespace LoginDeAbarrotech
             MessageBox.Show(resultMessage, "Resultados del Cuestionario",
                           MessageBoxButton.OK, MessageBoxImage.Information);
 
-           NavegarAPreguntasIngenierias();
+            // Aquí podrías agregar código para enviar las respuestas a una base de datos, servicio web, etc.
         }
     }
 }

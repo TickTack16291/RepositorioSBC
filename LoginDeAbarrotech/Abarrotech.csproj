@@ -120,6 +120,9 @@
     <Compile Include="PreguntasArea.xaml.cs">
       <DependentUpon>PreguntasArea.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PreguntasIngenierias.xaml.cs">
+      <DependentUpon>PreguntasIngenierias.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Usuario.cs" />
     <Page Include="LoginAbarrotech.xaml">
@@ -134,6 +137,10 @@
       <DependentUpon>LoginAbarrotech.xaml</DependentUpon>
     </Compile>
     <Page Include="PreguntasArea.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PreguntasIngenierias.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

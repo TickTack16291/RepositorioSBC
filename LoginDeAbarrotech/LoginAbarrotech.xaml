@@ -18,8 +18,8 @@
                 -->
             <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                 <!--Con los valores de gradient podemos modificar que tan degradado es el fondo-->
-                <GradientStop Color="#1976D2" Offset="2.5"/>
-                <GradientStop Color="#42A5F5" Offset="5.0"/>
+                <GradientStop Color="BlueViolet" Offset="2.5"/>
+                <GradientStop Color="White" Offset="5.0"/>
             </LinearGradientBrush>
         </Grid.Background>
 
@@ -35,14 +35,7 @@
 
                 <StackPanel>
                     <!--Viewbox hace que el contenido se escale automaticamente-->
-                    <Viewbox Width="60" Height="60" HorizontalAlignment="Center" Margin="0,0,0,10">
-                        <Canvas Width="24" Height="24">
-                            <Ellipse Fill="#1976D2" Width="6" Height="6" Canvas.Left="5" Canvas.Top="16"/>
-                            <Ellipse Fill="#1976D2" Width="6" Height="6" Canvas.Left="15" Canvas.Top="16"/>
-                            <Path Data="M2,2 L4,2 L6,12 L18,12 L20,6 L7,6"
-                              Stroke="#1976D2" StrokeThickness="2" Fill="Transparent"/>
-                        </Canvas>
-                    </Viewbox>
+                    
                     <TextBlock Text="Orientación Vocacional" FontSize="22" FontWeight="Bold" 
                            Foreground="#1565C0" HorizontalAlignment="Center" Margin="0,0,0,20"/>
                 </StackPanel>

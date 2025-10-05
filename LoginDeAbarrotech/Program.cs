@@ -3495,13 +3495,13 @@
             var repository = new RuleRepository();
             repository.Load(x => x.From(typeof(ReglaP1Consolidada).Assembly));
 
-            // Compilar las reglas
+            // Compilar las reglas de SBC
             var factory = repository.Compile();
 
-            // Crear una sesión de reglas
+            // Crear una sesión de reglas solo para las primeras 10 preguntas
             var session = factory.CreateSession();
 
-            // Crear los hechos (facts)
+            // Crear los hechos (facts) hechos asociados al area de enfasis
             var respuestas = new RespuestaUsuario
             {
                 respuestaNo1 = p1,
@@ -3514,6 +3514,7 @@
                 respuestaNo8 = p8,
                 respuestaNo9 = p9,
                 respuestaNo10 = p10,
+                //Sí lees esto...Ti amo AA <3 
             };
 
             var puntajes = new PuntajeArea();
