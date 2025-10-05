@@ -3531,7 +3531,7 @@
         }
     }
 
-    internal class Program
+    internal class BaseConocimiento
     {
         static void prueba(string[] args)
         {

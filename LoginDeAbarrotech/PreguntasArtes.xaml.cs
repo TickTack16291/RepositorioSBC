@@ -1,5 +1,4 @@
 ﻿using Reglas;
-using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
@@ -8,64 +7,37 @@ using System.Windows.Media;
 namespace LoginDeAbarrotech
 {
     /// <summary>
-    /// Lógica de interacción para PreguntasArea.xaml
+    /// Lógica de interacción para PreguntasArtes.xaml
     /// </summary>
-    public partial class PreguntasArea : Window
+    public partial class PreguntasArtes : Page
     {
-        public PreguntasArea()
+        public PreguntasArtes()
         {
             InitializeComponent();
             InitializeQuestions();
         }
 
-        private void NavegarAPreguntasIngenierias()
-        {
-            try
-            {
-                // 1. Crea la nueva página
-                PreguntasArtes nuevaPagina = new PreguntasArtes();
-                this.Content = nuevaPagina; // ← Asigna la página, no solo su Content
-
-                //Limpia recursos anteriores
-                GC.Collect();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al cambiar página: {ex.Message}");
-            }
-        }
-
         private List<ComboBox> answerComboBoxes = new List<ComboBox>();
-        private const int totalQuestions = 10;
+        private const int totalQuestions = 5;
 
-        public string[] respuestas = new string[10];
+        public string[] respuestas = new string[5];
 
         // Preguntas y opciones de ejemplo
         private string[] questions = {
-            "Pregunta 1: ¿Qué asignaturas disfrutas más en la preparatoria?",
-            "Pregunta 2: ¿Qué tipo de actividades disfrutas más en tu tiempo libre?",
-            "Pregunta 3: ¿Prefieres trabajar con…?",
-            "Pregunta 4 ¿Qué valoras más en un trabajo?",
-            "Pregunta 5 ¿Cuál de estas frases resuena más contigo?",
-            "Pregunta 6 Si pudieras elegir un proyecto de vida, sería…",
-            "Pregunta 7 ¿Qué tipo de problemas disfrutas resolver más?",
-            "Pregunta 8 ¿Qué ambiente de aprendizaje prefieres?",
-            "Pregunta 9 ¿En qué te visualizas trabajando en el futuro?",
-            "Pregunta 10 Si tuvieras que elegir un rol en un equipo de trabajo, serías…"
+        "Pregunta 1: ¿Qué forma de expresión artística prefieres?",
+        "Pregunta 2: ¿En qué tipo de proyectos te gustaría trabajar?",
+        "Pregunta 3: ¿Qué habilidades te describes?",
+        "Pregunta 4: ¿Qué ambiente de trabajo te atrae más?",
+        "Pregunta 5: ¿Qué tipo de audiencia prefieres?"
         };
 
         private string[][] options = {
-       new string[] { "Seleccione...", "a) Matemáticas, Física, Química", "b) Biología, Química", "c) Historia, Filosofía, Literatura", "d) Sociología, Economía, Derecho", "e) Arte, Música, Teatro" },
-       new string[] { "Seleccione...", "a) Resolver problemas, armar/desarmar cosas", "b) Leer, Escribir, Reflexionar", "c) Ayudar, aconsejar, enseñar", "d) Dibujar, pintar, crear musica", "e) Actividades al aire libre, cultivar, criar y cuidad animales", "f) Hacer experimentos, entender a la naturaleza" },
-       new string[] { "Seleccione...", "a) Máquinas, sistemas, tecnología", "b) Personas y sus relaciones", "c) Ideas y conceptos", "d) Expresiones creativas", "e) Naturaleza, animales, plantas", "f) Sustancias, Materiales, Experimentos" },
-       new string[] { "Seleccione...", "a) Innovar, resolver problemas técnicos, Conocer las relaciones materiales", "b) Impactar en la sociedad, leyes, políticas", "c) Comprender la cultura y el pensamiento", "d) Cuidar la salud y bienestar", "e) Expresar la creatividad", "f) Trabajar con la tierra y alimentos", "g) Entender el funcionamiento del mundo y de la naturaleza" },
-       new string[] { "Seleccione...", "a) Me gusta construir, programar o diseñar soluciones técnicas", "b) Me interesa entender y ayudar a las personas en sociedad", "c) Quiero comprender la cultura, la historia y el pensamiento", "d) Me motiva mejorar la salud de las personas", "e) Necesito expresarme de forma artística", "f) Quiero trabajar con la naturaleza y el campo", "g) Me gusta entender el porqué de los fenómenos y eventos que suceden a nuestro alrededor" },
-      new string[] { "Seleccione...", "a) Crear un invento, programa o empresa tecnológica", "b) Resolver problemas sociales, legales o económicos", "c) Escribir un libro o investigar sobre cultura", "d) Ser médico, enfermero o terapeuta", "e) Ser artista, músico o diseñador", "f) Ser agricultor, veterinario o ambientalista", "g) Ser físico o químico, contribuir en la creación de hipótesis de ciencia" },
-      new string[] { "Seleccione...", "a) Técnicos o lógicos", "b) Sociales o políticos", "c) Filosóficos o culturales", "d) De salud o bienestar", "e) Creativos y artísticos", "f) Naturales y ambientales", "g) Científicos ye Innovadores" },
-      new string[] { "Seleccione...", "a) Industria, computadoras", "b) Biblioteca, investigación documental", "c) Prácticas comunitarias", "d) Escenarios creativos (teatro, música, diseño)", "e) Campos de cultivo, naturaleza", "f) Laboratorios, taller, Escenarios de campo" },
-      new string[] { "Seleccione...", "a) Diseñando soluciones técnicas o tecnológicas", "b) Investigando o resolviendo problemas sociales", "c) Enseñando, escribiendo o investigando ideas", "d) Tratando pacientes o investigando enfermedades", "e) Creando arte, diseño o música", "f) Cultivando, investigando plantas o cuidando animales", "g) Experimentando, Investigando, Crear nuevos componentes" },
-      new string[] { "Seleccione...", "a) El que diseña o construye", "b) El que organiza, media y negocia", "c) El que reflexiona y propone ideas", "d) El que cuida la salud y bienestar", "e) El que inspira con creatividad", "f) El que conecta con la naturaleza", "g) El que conecta con el entendimiento del entorno" }
-};
+    new string[] { "Seleccione...", "a) Pintura, escultura, fotografía", "b) Movimiento corporal y baile", "c) Diseño digital, ilustración, branding", "d) Sonido, instrumentos musicales, composición", "e) Actuación, dirección escénica, dramaturgia" },
+    new string[] { "Seleccione...", "a) Crear obras de arte para exposiciones", "b) Coreografías y performances de danza", "c) Diseñar logotipos, posters, interfaces", "d) Componer música o tocar en una banda", "e) Montar obras de teatro o actuar" },
+    new string[] { "Seleccione...", "a) Habilidad para dibujar, pintar o esculpir", "b) Habilidad para bailar y expresar con el cuerpo", "c) Habilidad para usar software de diseño y creatividad visual", "d) Habilidad para tocar instrumentos o cantar", "e) Habilidad para actuar o escribir guiones" },
+    new string[] { "Seleccione...", "a) Estudio de arte o galería", "b) Estudio de danza o escenario", "c) Estudio de diseño o agencia", "d) Estudio de grabación o sala de conciertos", "e) Teatro o set de filmación" },
+    new string[] { "Seleccione...", "a) Spectadores en una galería", "b) Audiencia en vivo en performances", "c) Clientes o usuarios de productos visuales", "d) Oyentes en conciertos o grabaciones", "e) Público en obras de teatro" }
+        };
 
         private void InitializeQuestions()
         {
@@ -76,7 +48,7 @@ namespace LoginDeAbarrotech
                 {
                     BorderBrush = new SolidColorBrush(Color.FromRgb(189, 195, 199)),
                     BorderThickness = new Thickness(1),
-                    Background = new SolidColorBrush(Color.FromRgb(248, 249, 250)),
+                    Background = new SolidColorBrush(Color.FromRgb(69, 213, 167)),
                     CornerRadius = new CornerRadius(4),
                     Margin = new Thickness(0, 6, 0, 6),
                     Padding = new Thickness(15)
@@ -152,8 +124,6 @@ namespace LoginDeAbarrotech
                 return;
             }
 
-
-
             // Recopilar respuestas
             List<string> answers = new List<string>();
             for (int i = 0; i < answerComboBoxes.Count; i++)
@@ -180,7 +150,7 @@ namespace LoginDeAbarrotech
             MessageBox.Show(resultMessage, "Resultados del Cuestionario",
                           MessageBoxButton.OK, MessageBoxImage.Information);
 
-            NavegarAPreguntasIngenierias();
+            // Aquí podrías agregar código para enviar las respuestas a una base de datos, servicio web, etc.
         }
     }
 }

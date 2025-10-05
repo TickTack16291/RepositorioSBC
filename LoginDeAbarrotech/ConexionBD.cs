@@ -1,8 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
-using Mysqlx.Crud;
 using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Windows;
 
 
