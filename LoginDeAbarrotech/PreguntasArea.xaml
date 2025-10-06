@@ -38,7 +38,7 @@
         </Border>
 
         <!-- Botón de envío - Siempre visible en la parte inferior -->
-        <Button Grid.Row="2" 
+        <Button Grid.Row="1" 
               x:Name="BtnSubmit" 
               Content="Enviar Respuestas" 
               Click="BtnSubmit_Click"
@@ -48,6 +48,6 @@
               FontSize="12"
               Background="#3498DB"
               Foreground="White"
-              BorderBrush="#2980B9"/>
+              BorderBrush="#2980B9" Grid.RowSpan="2" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>

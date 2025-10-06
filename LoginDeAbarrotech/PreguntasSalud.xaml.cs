@@ -1,71 +1,54 @@
 ﻿using Reglas;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
 namespace LoginDeAbarrotech
 {
     /// <summary>
-    /// Lógica de interacción para PreguntasArea.xaml
+    /// Lógica de interacción para PreguntasSalud.xaml
     /// </summary>
-    public partial class PreguntasArea : Window
+    public partial class PreguntasSalud : Page
     {
-        public PreguntasArea()
+        public PreguntasSalud()
         {
             InitializeComponent();
-            InitializeQuestions();
+            InitializeQuestions();  
         }
-
-        private void NavegarAPreguntasIngenierias()
-        {
-            try
-            {
-                // 1. Crea la nueva página
-              PreguntasSalud preguntas = new PreguntasSalud();
-                this.Content = preguntas; // ← Asigna la página, no solo su Content
-
-                //Limpia recursos anteriores
-                GC.Collect();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al cambiar página: {ex.Message}");
-            }
-        }
-
         private List<ComboBox> answerComboBoxes = new List<ComboBox>();
-        private const int totalQuestions = 10;
+        private const int totalQuestions = 6;
 
-        public string[] respuestas = new string[10];
+        public string[] respuestas = new string[6];
 
         // Preguntas y opciones de ejemplo
         private string[] questions = {
-            "Pregunta 1: ¿Qué asignaturas disfrutas más en la preparatoria?",
-            "Pregunta 2: ¿Qué tipo de actividades disfrutas más en tu tiempo libre?",
-            "Pregunta 3: ¿Prefieres trabajar con…?",
-            "Pregunta 4 ¿Qué valoras más en un trabajo?",
-            "Pregunta 5 ¿Cuál de estas frases resuena más contigo?",
-            "Pregunta 6 Si pudieras elegir un proyecto de vida, sería…",
-            "Pregunta 7 ¿Qué tipo de problemas disfrutas resolver más?",
-            "Pregunta 8 ¿Qué ambiente de aprendizaje prefieres?",
-            "Pregunta 9 ¿En qué te visualizas trabajando en el futuro?",
-            "Pregunta 10 Si tuvieras que elegir un rol en un equipo de trabajo, serías…"
+        "Pregunta 1: ¿Qué aspecto de la salud te interesa más?",
+        "Pregunta 2: ¿Qué tipo de actividades te gustaría realizar en tu trabajo?",
+        "Pregunta 3: ¿Con qué grupo de población prefieres trabajar?",
+        "Pregunta 4: ¿Qué habilidades crees que son más importantes para ti?",
+        "Pregunta 5: ¿Qué entorno de trabajo prefieres?",
+        "Pregunta 6: ¿Qué te motiva a estudiar una carrera de salud?"
         };
 
         private string[][] options = {
-       new string[] { "Seleccione...", "a) Matemáticas, Física, Química", "b) Biología, Química", "c) Historia, Filosofía, Literatura", "d) Sociología, Economía, Derecho", "e) Arte, Música, Teatro" },
-       new string[] { "Seleccione...", "a) Resolver problemas, armar/desarmar cosas", "b) Leer, Escribir, Reflexionar", "c) Ayudar, aconsejar, enseñar", "d) Dibujar, pintar, crear musica", "e) Actividades al aire libre, cultivar, criar y cuidad animales", "f) Hacer experimentos, entender a la naturaleza" },
-       new string[] { "Seleccione...", "a) Máquinas, sistemas, tecnología", "b) Personas y sus relaciones", "c) Ideas y conceptos", "d) Expresiones creativas", "e) Naturaleza, animales, plantas", "f) Sustancias, Materiales, Experimentos" },
-       new string[] { "Seleccione...", "a) Innovar, resolver problemas técnicos, Conocer las relaciones materiales", "b) Impactar en la sociedad, leyes, políticas", "c) Comprender la cultura y el pensamiento", "d) Cuidar la salud y bienestar", "e) Expresar la creatividad", "f) Trabajar con la tierra y alimentos", "g) Entender el funcionamiento del mundo y de la naturaleza" },
-       new string[] { "Seleccione...", "a) Me gusta construir, programar o diseñar soluciones técnicas", "b) Me interesa entender y ayudar a las personas en sociedad", "c) Quiero comprender la cultura, la historia y el pensamiento", "d) Me motiva mejorar la salud de las personas", "e) Necesito expresarme de forma artística", "f) Quiero trabajar con la naturaleza y el campo", "g) Me gusta entender el porqué de los fenómenos y eventos que suceden a nuestro alrededor" },
-      new string[] { "Seleccione...", "a) Crear un invento, programa o empresa tecnológica", "b) Resolver problemas sociales, legales o económicos", "c) Escribir un libro o investigar sobre cultura", "d) Ser médico, enfermero o terapeuta", "e) Ser artista, músico o diseñador", "f) Ser agricultor, veterinario o ambientalista", "g) Ser físico o químico, contribuir en la creación de hipótesis de ciencia" },
-      new string[] { "Seleccione...", "a) Técnicos o lógicos", "b) Sociales o políticos", "c) Filosóficos o culturales", "d) De salud o bienestar", "e) Creativos y artísticos", "f) Naturales y ambientales", "g) Científicos ye Innovadores" },
-      new string[] { "Seleccione...", "a) Industria, computadoras", "b) Biblioteca, investigación documental", "c) Prácticas comunitarias", "d) Escenarios creativos (teatro, música, diseño)", "e) Campos de cultivo, naturaleza", "f) Laboratorios, taller, Escenarios de campo" },
-      new string[] { "Seleccione...", "a) Diseñando soluciones técnicas o tecnológicas", "b) Investigando o resolviendo problemas sociales", "c) Enseñando, escribiendo o investigando ideas", "d) Tratando pacientes o investigando enfermedades", "e) Creando arte, diseño o música", "f) Cultivando, investigando plantas o cuidando animales", "g) Experimentando, Investigando, Crear nuevos componentes" },
-      new string[] { "Seleccione...", "a) El que diseña o construye", "b) El que organiza, media y negocia", "c) El que reflexiona y propone ideas", "d) El que cuida la salud y bienestar", "e) El que inspira con creatividad", "f) El que conecta con la naturaleza", "g) El que conecta con el entendimiento del entorno" }
-};
+    new string[] { "Seleccione...", "a) La salud bucal y dental", "b) El cuidado directo de pacientes en diversos entornos", "c) Los medicamentos y su efecto en el cuerpo", "d) El envejecimiento y el cuidado de adultos mayores", "e) El diagnóstico y tratamiento de enfermedades en general", "f) La alimentación y su impacto en la salud", "g) La salud mental y el comportamiento humano" },
+    new string[] { "Seleccione...", "a) Realizar procedimientos dentales (limpiezas, extracciones, etc.)", "b) Administrar cuidados, tomar signos vitales, asistir en procedimientos", "c) Preparar y dispensar medicamentos, asesorar sobre su uso", "d) Diseñar programas de bienestar para adultos mayores", "e) Examinar pacientes, ordenar pruebas, prescribir tratamientos", "f) Evaluar dietas, planificar menús saludables, educar sobre nutrición", "g) Realizar terapias, evaluaciones psicológicas, investigar comportamientos" },
+    new string[] { "Seleccione...", "a) Pacientes de todas las edades con problemas dentales", "b) Pacientes hospitalizados o en comunidad de todas las edades", "c) Público en general que necesita orientación sobre medicamentos", "d) Adultos mayores y sus familias", "e) Pacientes de todas las edades con diversas enfermedades", "f) Personas que buscan mejorar su salud a través de la dieta", "g) Personas con problemas emocionales, mentales o de comportamiento" },
+    new string[] { "Seleccione...", "a) Habilidad manual para procedimientos detallados", "b) Empatía y capacidad para trabajar bajo presión", "c) Conocimiento profundo de química y biología", "d) Paciencia y comprensión para tratar con adultos mayores", "e) Capacidad de diagnóstico y toma de decisiones rápidas", "f) Conocimiento sobre alimentos y metabolismo", "g) Habilidad para escuchar y analizar problemas psicológicos" },
+    new string[] { "Seleccione...", "a) Consultorio dental", "b) Hospital, clínica o comunidad", "c) Farmacia comunitaria u hospitalaria", "d) Residencias para adultos mayores, centros de día", "e) Hospital, consultorio privado, urgencias", "f) Consultorio, hospital, escuelas, empresas", "g) Consultorio psicológico, hospitales, escuelas" },
+    new string[] { "Seleccione...", "a) Mejorar la salud bucal de las personas", "b) Proporcionar cuidado y confort a los pacientes", "c) Asegurar el uso seguro y efectivo de los medicamentos", "d) Mejorar la calidad de vida de los adultos mayores", "e) Curar enfermedades y salvar vidas", "f) Promover hábitos alimenticios saludables", "g) Ayudar a las personas a superar problemas mentales" }
+     };
 
         private void InitializeQuestions()
         {
@@ -76,7 +59,7 @@ namespace LoginDeAbarrotech
                 {
                     BorderBrush = new SolidColorBrush(Color.FromRgb(189, 195, 199)),
                     BorderThickness = new Thickness(1),
-                    Background = new SolidColorBrush(Color.FromRgb(248, 249, 250)),
+                    Background = new SolidColorBrush(Color.FromRgb(69, 213, 167)),
                     CornerRadius = new CornerRadius(4),
                     Margin = new Thickness(0, 6, 0, 6),
                     Padding = new Thickness(15)
@@ -152,8 +135,6 @@ namespace LoginDeAbarrotech
                 return;
             }
 
-
-
             // Recopilar respuestas
             List<string> answers = new List<string>();
             for (int i = 0; i < answerComboBoxes.Count; i++)
@@ -180,7 +161,7 @@ namespace LoginDeAbarrotech
             MessageBox.Show(resultMessage, "Resultados del Cuestionario",
                           MessageBoxButton.OK, MessageBoxImage.Information);
 
-            NavegarAPreguntasIngenierias();
+            // Aquí podrías agregar código para enviar las respuestas a una base de datos, servicio web, etc.
         }
     }
 }
