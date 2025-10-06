@@ -133,6 +133,9 @@
     <Compile Include="PreguntasSalud.xaml.cs">
       <DependentUpon>PreguntasSalud.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PreguntasSociales.xaml.cs">
+      <DependentUpon>PreguntasSociales.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Usuario.cs" />
     <Page Include="LoginAbarrotech.xaml">
       <SubType>Designer</SubType>
@@ -162,6 +165,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PreguntasSalud.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PreguntasSociales.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
