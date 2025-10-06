@@ -123,6 +123,9 @@
     <Compile Include="PreguntasArtes.xaml.cs">
       <DependentUpon>PreguntasArtes.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PreguntasHumanidades.xaml.cs">
+      <DependentUpon>PreguntasHumanidades.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PreguntasIngenierias.xaml.cs">
       <DependentUpon>PreguntasIngenierias.xaml</DependentUpon>
     </Compile>
@@ -144,6 +147,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PreguntasArtes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PreguntasHumanidades.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
