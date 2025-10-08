@@ -126,6 +126,9 @@
     <Compile Include="PreguntasCNaturales.xaml.cs">
       <DependentUpon>PreguntasCNaturales.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PreguntasCVida.xaml.cs">
+      <DependentUpon>PreguntasCVida.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PreguntasHumanidades.xaml.cs">
       <DependentUpon>PreguntasHumanidades.xaml</DependentUpon>
     </Compile>
@@ -160,6 +163,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PreguntasCNaturales.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PreguntasCVida.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
