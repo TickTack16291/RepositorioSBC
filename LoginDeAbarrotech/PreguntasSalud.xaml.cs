@@ -163,7 +163,7 @@ namespace LoginDeAbarrotech
                 if (selectedIndex > 0)
                 {
                     string respuesta = ((char)('a' + (selectedIndex - 1))).ToString();
-                    respuestasEspecificas.Add(11 + i, respuesta); // 11-17 para ingenierías
+                    respuestasEspecificas.Add(28 + i, respuesta); // 11-17 para ingenierías
                 }
             }
 
