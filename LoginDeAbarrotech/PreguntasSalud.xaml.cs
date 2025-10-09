@@ -21,11 +21,13 @@ namespace LoginDeAbarrotech
     /// </summary>
     public partial class PreguntasSalud : Page
     {
-        public PreguntasSalud()
+        public PreguntasSalud(ServicioOrientacionVocacional servicio)
         {
             InitializeComponent();
             InitializeQuestions();  
+            _servicio = servicio;
         }
+        private ServicioOrientacionVocacional _servicio;
         private List<ComboBox> answerComboBoxes = new List<ComboBox>();
         private const int totalQuestions = 6;
 
@@ -153,13 +155,42 @@ namespace LoginDeAbarrotech
                     respuestas[i] = ((char)('a' + (selectedIndex - 1))).ToString(); // a + 0 se queda en a, a+1 se vuelve b y asi sucesivamente con casteo de char, ya se valido que no sea 0
                 }
             }
-            var resultado1 = MotorOrientacionVocacional.DeterminarAreaEnfasis(respuestas[0], respuestas[1], respuestas[2], respuestas[3], respuestas[4], respuestas[5], respuestas[6], respuestas[7], respuestas[8], respuestas[9]);
-            MessageBox.Show(resultado1.AreaGanadora);
+
+            var respuestasEspecificas = new Dictionary<int, string>();
+            for (int i = 0; i < totalQuestions; i++)
+            {
+                int selectedIndex = answerComboBoxes[i].SelectedIndex;
+                if (selectedIndex > 0)
+                {
+                    string respuesta = ((char)('a' + (selectedIndex - 1))).ToString();
+                    respuestasEspecificas.Add(11 + i, respuesta); // 11-17 para ingenierías
+                }
+            }
+
+            // Procesar respuestas específicas
+            _servicio.ProcesarRespuestasEspecificas(respuestasEspecificas);
+
+            // Obtener resultados finales
+            var resultados = _servicio.ObtenerResultadosFinales();
 
             // Mostrar resultados
-            string resultMessage = "¡Respuestas enviadas correctamente!\n\n" + string.Join("\n", answers);
-            MessageBox.Show(resultMessage, "Resultados del Cuestionario",
-                          MessageBoxButton.OK, MessageBoxImage.Information);
+            string mensajeResultados = "¡Test completado!\n\n";
+            foreach (var resultado in resultados)
+            {
+                mensajeResultados += $"{resultado.Key}: {resultado.Value}\n";
+            }
+
+            MessageBox.Show(mensajeResultados, "Resultados de Orientación Vocacional");
+
+            // Aquí puedes navegar a una página de resultados finales
+            // o cerrar la aplicación, según lo necesites
+            //var resultado1 = MotorOrientacionVocacional.DeterminarAreaEnfasis(respuestas[0], respuestas[1], respuestas[2], respuestas[3], respuestas[4], respuestas[5], respuestas[6], respuestas[7], respuestas[8], respuestas[9]);
+            //MessageBox.Show(resultado1.AreaGanadora);
+
+            //// Mostrar resultados
+            //string resultMessage = "¡Respuestas enviadas correctamente!\n\n" + string.Join("\n", answers);
+            //MessageBox.Show(resultMessage, "Resultados del Cuestionario",
+            //              MessageBoxButton.OK, MessageBoxImage.Information);
 
             // Aquí podrías agregar código para enviar las respuestas a una base de datos, servicio web, etc.
         }

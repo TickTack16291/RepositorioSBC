@@ -1,4 +1,5 @@
-﻿using Reglas;
+﻿using Org.BouncyCastle.Tls;
+using Reglas;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -22,22 +23,24 @@ namespace LoginDeAbarrotech
             InitializeQuestions();
         }
 
-        private void NavegarAPreguntasIngenierias()
-        {
-            try
-            {
-                // 1. Crea la nueva página
-              PreguntasSalud preguntas = new PreguntasSalud();
-                this.Content = preguntas; // ← Asigna la página, no solo su Content
+        //private void NavegarAPreguntasIngenierias()
+        //{
+        //    try
+        //    {
+        //        // 1. Crea la nueva página
+        //      PreguntasSalud preguntas = new PreguntasSalud();
+        //        this.Content = preguntas; // ← Asigna la página, no solo su Content
 
-                //Limpia recursos anteriores
-                GC.Collect();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al cambiar página: {ex.Message}");
-            }
-        }
+        //        //Limpia recursos anteriores
+        //        GC.Collect();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show($"Error al cambiar página: {ex.Message}");
+        //    }
+        //}
+
+
         private ServicioOrientacionVocacional _servicio;
         private List<ComboBox> answerComboBoxes = new List<ComboBox>();
         private const int totalQuestions = 10;
@@ -179,17 +182,75 @@ namespace LoginDeAbarrotech
                     respuestas[i] = ((char)('a' + (selectedIndex - 1))).ToString(); // a + 0 se queda en a, a+1 se vuelve b y asi sucesivamente con casteo de char, ya se valido que no sea 0
                 }
             }
+             var resultado = _servicio.ProcesarPrimeraFase(respuestas[0], respuestas[1], respuestas[2], respuestas[3], respuestas[4], respuestas[5], respuestas[6], respuestas[7], respuestas[8], respuestas[9]);
 
-            
-            var resultado1 = MotorOrientacionVocacional.DeterminarAreaEnfasis(respuestas[0], respuestas[1], respuestas[2], respuestas[3], respuestas[4], respuestas[5], respuestas[6], respuestas[7], respuestas[8], respuestas[9]);
-            MessageBox.Show(resultado1.AreaGanadora);
+            if (resultado.EsEmpate)
+            {
+                //Mostrar La seleccion de las areas, decision personal
+                var areasLimitadas = _servicio.LimitarEmpateADosAreas(resultado.Areas);
+                MostrarVentanasSeleccionArea(areasLimitadas);
+            }
+            else
+            {
+                //Navegar al area ganadora
+                NavegarAPreguntasEspecificas(resultado.Areas[0]);
+            }
 
-            // Mostrar resultados
-            string resultMessage = "¡Respuestas enviadas correctamente!\n\n" + string.Join("\n", answers);
-            MessageBox.Show(resultMessage, "Resultados del Cuestionario",
-                          MessageBoxButton.OK, MessageBoxImage.Information);
+            //    var resultado1 = MotorOrientacionVocacional.DeterminarAreaEnfasis(respuestas[0], respuestas[1], respuestas[2], respuestas[3], respuestas[4], respuestas[5], respuestas[6], respuestas[7], respuestas[8], respuestas[9]);
+            //MessageBox.Show(resultado1.AreaGanadora);
 
-            NavegarAPreguntasIngenierias();
+            //// Mostrar resultados
+            //string resultMessage = "¡Respuestas enviadas correctamente!\n\n" + string.Join("\n", answers);
+            //MessageBox.Show(resultMessage, "Resultados del Cuestionario",
+            //              MessageBoxButton.OK, MessageBoxImage.Information);
+
+            //NavegarAPreguntasIngenierias();
+        }
+
+        private void MostrarVentanasSeleccionArea(List<string> areas)
+        {
+            var seleccionWindow  = new SeleccionAreaWindow(areas);
+            seleccionWindow.AreaSeleccionada += (Sender, areaSeleccionada) =>
+            {
+                NavegarAPreguntasEspecificas(areaSeleccionada);
+            };
+            seleccionWindow.ShowDialog();
+        }
+
+        private void NavegarAPreguntasEspecificas(string area)
+        {
+            try
+            {
+                // Determinar qué página cargar según el área
+                Page paginaEspecifica = area switch
+                {
+                    "Ingenierías" => new PreguntasIngenierias(_servicio),
+                    "Ciencias de la Salud" => new PreguntasSalud(_servicio),
+                    "Artes" => new PreguntasArtes(_servicio),
+                    "Humanidades" => new PreguntasHumanidades(_servicio),
+                    "Ciencias Sociales" => new PreguntasSociales(_servicio),
+                    "Ciencias Naturales" => new PreguntasCNaturales(_servicio),
+                    "Ciencias de la Vida" => new PreguntasCVida(_servicio),
+                    _ => new PreguntasIngenierias(_servicio) // Default
+                };
+
+                // Crear una nueva ventana para las preguntas específicas
+                var ventanaPreguntas = new Window
+                {
+                    Content = paginaEspecifica,
+                    Title = $"Preguntas de {area}",
+                    Width = 800,
+                    Height = 600,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner
+                };
+
+                ventanaPreguntas.Show();
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al navegar: {ex.Message}");
+            }
         }
     }
 }
