@@ -12,9 +12,13 @@ namespace LoginDeAbarrotech
     /// </summary>
     public partial class PreguntasArea : Window
     {
+
+       
+       
         public PreguntasArea()
         {
             InitializeComponent();
+            _servicio = new ServicioOrientacionVocacional();
             InitializeQuestions();
         }
 
@@ -34,7 +38,7 @@ namespace LoginDeAbarrotech
                 MessageBox.Show($"Error al cambiar página: {ex.Message}");
             }
         }
-
+        private ServicioOrientacionVocacional _servicio;
         private List<ComboBox> answerComboBoxes = new List<ComboBox>();
         private const int totalQuestions = 10;
 
@@ -66,6 +70,7 @@ namespace LoginDeAbarrotech
       new string[] { "Seleccione...", "a) Diseñando soluciones técnicas o tecnológicas", "b) Investigando o resolviendo problemas sociales", "c) Enseñando, escribiendo o investigando ideas", "d) Tratando pacientes o investigando enfermedades", "e) Creando arte, diseño o música", "f) Cultivando, investigando plantas o cuidando animales", "g) Experimentando, Investigando, Crear nuevos componentes" },
       new string[] { "Seleccione...", "a) El que diseña o construye", "b) El que organiza, media y negocia", "c) El que reflexiona y propone ideas", "d) El que cuida la salud y bienestar", "e) El que inspira con creatividad", "f) El que conecta con la naturaleza", "g) El que conecta con el entendimiento del entorno" }
 };
+
 
         private void InitializeQuestions()
         {
@@ -145,6 +150,8 @@ namespace LoginDeAbarrotech
                 }
             }
 
+
+
             if (!allAnswered)
             {
                 MessageBox.Show($"Por favor responde las siguientes preguntas:\n{string.Join(", ", unansweredQuestions)}",
@@ -172,6 +179,8 @@ namespace LoginDeAbarrotech
                     respuestas[i] = ((char)('a' + (selectedIndex - 1))).ToString(); // a + 0 se queda en a, a+1 se vuelve b y asi sucesivamente con casteo de char, ya se valido que no sea 0
                 }
             }
+
+            
             var resultado1 = MotorOrientacionVocacional.DeterminarAreaEnfasis(respuestas[0], respuestas[1], respuestas[2], respuestas[3], respuestas[4], respuestas[5], respuestas[6], respuestas[7], respuestas[8], respuestas[9]);
             MessageBox.Show(resultado1.AreaGanadora);
 

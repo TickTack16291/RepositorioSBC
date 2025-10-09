@@ -3592,220 +3592,107 @@
     }
 
 
-    public class ServicioOrientacionVocacional
-    {
-        private PuntajeArea _puntajesActuales;
-        private List <string> _areasGanadoras;
-        private RespuestaUsuario _respuestasAcumuladas;
-
-        public ServicioOrientacionVocacional()
-        {
-
-
-            _respuestasAcumuladas = new RespuestaUsuario();
-            _puntajesActuales = new PuntajeArea();
-        }
-
-        public (List<String> Areas, bool EsEmpate) ProcesarPrimeraFase(string p1, string p2, string p3, string p4, string p5,
-        string p6, string p7, string p8, string p9, string p10)
-        {
-            ///Guardar las repuestas Iniciales
-            _respuestasAcumuladas.respuestaNo1 = p1;
-            _respuestasAcumuladas.respuestaNo2 = p2;
-            _respuestasAcumuladas.respuestaNo3 = p3;
-            _respuestasAcumuladas.respuestaNo4 = p4;
-            _respuestasAcumuladas.respuestaNo5 = p5;
-            _respuestasAcumuladas.respuestaNo6 = p6;
-            _respuestasAcumuladas.respuestaNo7 = p7;
-            _respuestasAcumuladas.respuestaNo8 = p8;
-            _respuestasAcumuladas.respuestaNo9 = p9;
-            _respuestasAcumuladas.respuestaNo10 = p10;
-
-            var resultado = MotorOrientacionVocacional.DeterminarAreaEnfasis(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10);
-
-            _areasGanadoras = resultado.AreaGanadora;
-            _puntajesActuales = resultado.Puntajes;
-            return (resultado.AreaGanadora, resultado.AreaGanadora.Count > 1);
-
-        }
-
-        public List<int> ObtenerRangoPreguntasParaArea(string area)
-        {
-            var mapeoPreguntas = new Dictionary<string, List<int>>
-            {
-                ["Ingenierías"] = new List<int> { 11, 12, 13, 14, 15, 16, 17 },
-                ["Artes"] = new List<int> { 18, 19, 20, 21, 22 },
-                ["Humanidades"] = new List<int> { 23, 24, 25, 26, 27 },
-                ["Ciencias de la Salud"] = new List<int> { 28, 29, 30, 31, 32, 33 },
-                ["Ciencias Sociales"] = new List<int> { 34, 35, 36, 37, 38 },
-                ["Ciencias Naturales"] = new List<int> { 39, 40, 41, 42, 43, 44, 45 },
-                ["Ciencias de la Vida"] = new List<int> { 46, 47, 48, 49, 50, 51, 52 }
-            };
-
-            return mapeoPreguntas.ContainsKey(area) ? mapeoPreguntas[area] : new List<int>();
-        }
-
-        public void ProcesarRespuestasEspecificas (Dictionary<int, string> respuestasPorNumero)
-        {
-
-            ///Actualizar el objeto de las respuestas acumuladas por las nuevas respuestas especificas
-            foreach(var respuesta in respuestasPorNumero)
-            {
-                var propiedad = _respuestasAcumuladas.GetType().GetProperty($"preguntaNo{respuesta.Key}");
-                if (propiedad != null)
-                {
-                    propiedad.SetValue(_respuestasAcumuladas, respuesta.Value);
-                }
-            }
-
-            ///Ejecutar todas las reglas con todas las repuestas Acumuladas //Alch no se ni que verga es este pedo
-            _puntajesActuales = MotorOrientacionVocacional.ProcesarTodasLasReglas(_respuestasAcumuladas);
-        }
-
-        public Dictionary<string, string> ObtenerResultadosFinales()
-        {
-            var resultados = new Dictionary<string, string>();
-
-            resultados["Area Principal"] = _puntajesActuales.ObtenerAreaGanadora();
-
-            foreach (var area in _areasGanadoras)
-            {
-                var especialidad = area switch
-                {
-                    "Ingenierías" => _puntajesActuales.ObtenerEspecialidadIngenieriaGanadora(),
-                    "Artes" => _puntajesActuales.ObtenerEspecialidadArtesGanadora(),
-                    "Humanidades" => _puntajesActuales.ObtenerEspecialidadHumanidadesGanadora(),
-                    "Ciencias de la Salud" => _puntajesActuales.ObtenerEspecialidadCienciasSaludGanadora(),
-                    "Ciencias Sociales" => _puntajesActuales.ObtenerEspecialidadCienciasSocialesGanadora(),
-                    "Ciencias Naturales" => _puntajesActuales.ObtenerEspecialidadCienciasNaturalesGanadora(),
-                    "Ciencias de la Vida" => _puntajesActuales.ObtenerEspecialidadCienciasVidaGanadora(),
-                    _ => "Sin determinar"
-                };
-
-                resultados[$"Especialidad en {area}"] = especialidad;
-            }
-
-            //agregar puntajes detallados si se necesitan
-            resultados["Puntaje Ingenierías"] = _puntajesActuales.puntajeIngenieria.ToString();
-            resultados["Puntaje Ciencias de la Salud"] = _puntajesActuales.puntajeCienciasSalud.ToString();
-            ///quiza haya que aregar mas si se necestan
-            ///
-            return resultados;
-        }
-
-        public List<string> LimitarEmpateADosAreas(List<string> areasEmpatadas)
-        {
-
-            if (areasEmpatadas.Count<=2)
-                return areasEmpatadas;
-            
-              // Si hay más de 2 áreas empatadas, tomar las primeras 2 con mejor puntaje
-        // (esto es un ejemplo, puedes implementar la lógica que prefieras)
-        return areasEmpatadas.Take(2).ToList();
-    }  
-            
-        }
 
     }
 
-    internal class BaseConocimiento
-    {
-        static void prueba(string[] args)
-        {
-            //Console.WriteLine("SISTEMA DE ORIENTACIÓN VOCACIONAL - 52 PREGUNTAS\n");
+    //internal class BaseConocimiento
+    //{
+    //    static void prueba(string[] args)
+    //    {
+    //        //Console.WriteLine("SISTEMA DE ORIENTACIÓN VOCACIONAL - 52 PREGUNTAS\n");
 
-            //// EJEMPLO 1: Ingeniería de Software
-            //Console.WriteLine("=== EJEMPLO 1: Perfil Ingenieria de Software");
-            //var resultado1 = MotorOrientacionVocacional.DeterminarAreaEnfasis(
-            //    "a", "a", "a", "a", "a", "a", "a", "a", "a", "a",
-            //    "b", "b", "b", "b", "b", "b", "b", "c", "c", "c", "c", "c");
-            //MostrarResultado(resultado1);
+    //        //// EJEMPLO 1: Ingeniería de Software
+    //        //Console.WriteLine("=== EJEMPLO 1: Perfil Ingenieria de Software");
+    //        //var resultado1 = MotorOrientacionVocacional.DeterminarAreaEnfasis(
+    //        //    "a", "a", "a", "a", "a", "a", "a", "a", "a", "a",
+    //        //    "b", "b", "b", "b", "b", "b", "b", "c", "c", "c", "c", "c");
+    //        //MostrarResultado(resultado1);
 
-            //// EJEMPLO 2: Medicina
-            //Console.WriteLine("\n=== EJEMPLO 2: Perfil Medicina");
-            //var resultado2 = MotorOrientacionVocacional.DeterminarAreaEnfasis(
-            //    "c", "c", "b", "d", "d", "d", "d", "a", "d", "d",
-            //    "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a",
-            //    p28: "e", p29: "e", p30: "e", p31: "e", p32: "e", p33: "e");
-            //MostrarResultado(resultado2);
+    //        //// EJEMPLO 2: Medicina
+    //        //Console.WriteLine("\n=== EJEMPLO 2: Perfil Medicina");
+    //        //var resultado2 = MotorOrientacionVocacional.DeterminarAreaEnfasis(
+    //        //    "c", "c", "b", "d", "d", "d", "d", "a", "d", "d",
+    //        //    "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a",
+    //        //    p28: "e", p29: "e", p30: "e", p31: "e", p32: "e", p33: "e");
+    //        //MostrarResultado(resultado2);
 
-            //// EJEMPLO 3: Derecho
-            //Console.WriteLine("\n=== EJEMPLO 3: Perfil Derecho");
-            //var resultado3 = MotorOrientacionVocacional.DeterminarAreaEnfasis(
-            //    "e", "b", "c", "b", "b", "b", "b", "c", "b", "b",
-            //    "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a",
-            //    p34: "b", p35: "b", p36: "b", p37: "b", p38: "b");
-            //MostrarResultado(resultado3);
+    //        //// EJEMPLO 3: Derecho
+    //        //Console.WriteLine("\n=== EJEMPLO 3: Perfil Derecho");
+    //        //var resultado3 = MotorOrientacionVocacional.DeterminarAreaEnfasis(
+    //        //    "e", "b", "c", "b", "b", "b", "b", "c", "b", "b",
+    //        //    "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a",
+    //        //    p34: "b", p35: "b", p36: "b", p37: "b", p38: "b");
+    //        //MostrarResultado(resultado3);
 
-            //// EJEMPLO 4: Biología
-            //Console.WriteLine("\n=== EJEMPLO 4: Perfil Biología");
-            //var resultado4 = MotorOrientacionVocacional.DeterminarAreaEnfasis(
-            //    "b", "f", "f", "g", "g", "g", "g", "f", "g", "g",
-            //    "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a",
-            //    p39: "a", p40: "a", p41: "a", p42: "a", p43: "a", p44: "a", p45: "a");
-            //MostrarResultado(resultado4);
+    //        //// EJEMPLO 4: Biología
+    //        //Console.WriteLine("\n=== EJEMPLO 4: Perfil Biología");
+    //        //var resultado4 = MotorOrientacionVocacional.DeterminarAreaEnfasis(
+    //        //    "b", "f", "f", "g", "g", "g", "g", "f", "g", "g",
+    //        //    "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a",
+    //        //    p39: "a", p40: "a", p41: "a", p42: "a", p43: "a", p44: "a", p45: "a");
+    //        //MostrarResultado(resultado4);
 
-            //// EJEMPLO 5: Medicina Veterinaria
-            //Console.WriteLine("\n=== EJEMPLO 5: Perfil Medicina Veterinaria");
-            //var resultado5 = MotorOrientacionVocacional.DeterminarAreaEnfasis(
-            //    "c", "e", "e", "f", "f", "f", "f", "e", "f", "f",
-            //    "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a",
-            //    p46: "e", p47: "e", p48: "e", p49: "e", p50: "e", p51: "e", p52: "e");
-            //MostrarResultado(resultado5);
-        //}
+    //        //// EJEMPLO 5: Medicina Veterinaria
+    //        //Console.WriteLine("\n=== EJEMPLO 5: Perfil Medicina Veterinaria");
+    //        //var resultado5 = MotorOrientacionVocacional.DeterminarAreaEnfasis(
+    //        //    "c", "e", "e", "f", "f", "f", "f", "e", "f", "f",
+    //        //    "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a",
+    //        //    p46: "e", p47: "e", p48: "e", p49: "e", p50: "e", p51: "e", p52: "e");
+    //        //MostrarResultado(resultado5);
+    //    //}
 
-        //static void MostrarResultado((string AreaGanadora, PuntajeArea Puntajes) resultado)
-        //{
-        //    Console.WriteLine($"\nPUNTAJES FINALES:");
-        //    Console.WriteLine($"Ingenierías: {resultado.Puntajes.puntajeIngenieria}");
-        //    Console.WriteLine($"Ciencias de la Salud: {resultado.Puntajes.puntajeCienciasSalud}");
-        //    Console.WriteLine($"Humanidades: {resultado.Puntajes.puntajeHumanidades}");
-        //    Console.WriteLine($"Ciencias Sociales: {resultado.Puntajes.puntajeCienciasSociales}");
-        //    Console.WriteLine($"Artes: {resultado.Puntajes.puntajeArtes}");
-        //    Console.WriteLine($"Ciencias Naturales: {resultado.Puntajes.puntajeCienciasNaturales}");
-        //    Console.WriteLine($"Ciencias de la Vida: {resultado.Puntajes.puntajeCienciasDeLaVida}");
+    //    //static void MostrarResultado((string AreaGanadora, PuntajeArea Puntajes) resultado)
+    //    //{
+    //    //    Console.WriteLine($"\nPUNTAJES FINALES:");
+    //    //    Console.WriteLine($"Ingenierías: {resultado.Puntajes.puntajeIngenieria}");
+    //    //    Console.WriteLine($"Ciencias de la Salud: {resultado.Puntajes.puntajeCienciasSalud}");
+    //    //    Console.WriteLine($"Humanidades: {resultado.Puntajes.puntajeHumanidades}");
+    //    //    Console.WriteLine($"Ciencias Sociales: {resultado.Puntajes.puntajeCienciasSociales}");
+    //    //    Console.WriteLine($"Artes: {resultado.Puntajes.puntajeArtes}");
+    //    //    Console.WriteLine($"Ciencias Naturales: {resultado.Puntajes.puntajeCienciasNaturales}");
+    //    //    Console.WriteLine($"Ciencias de la Vida: {resultado.Puntajes.puntajeCienciasDeLaVida}");
 
-        //    Console.WriteLine($"\nÁREA DE ÉNFASIS RECOMENDADA: {resultado.AreaGanadora}");
+    //    //    Console.WriteLine($"\nÁREA DE ÉNFASIS RECOMENDADA: {resultado.AreaGanadora}");
 
-        //    // Mostrar especialidad según el área ganadora
-        //    switch (resultado.AreaGanadora)
-        //    {
-        //        case "Ingenierías":
-        //            var espIng = resultado.Puntajes.ObtenerEspecialidadIngenieriaGanadora();
-        //            if (espIng != "SinDeterminar")
-        //                Console.WriteLine($"ESPECIALIDAD: {espIng}");
-        //            break;
-        //        case "Artes":
-        //            var espArt = resultado.Puntajes.ObtenerEspecialidadArtesGanadora();
-        //            if (espArt != "SinDeterminar")
-        //                Console.WriteLine($"ESPECIALIDAD: {espArt}");
-        //            break;
-        //        case "Humanidades":
-        //            var espHum = resultado.Puntajes.ObtenerEspecialidadHumanidadesGanadora();
-        //            if (espHum != "SinDeterminar")
-        //                Console.WriteLine($"ESPECIALIDAD: {espHum}");
-        //            break;
-        //        case "Ciencias de la Salud":
-        //            var espSalud = resultado.Puntajes.ObtenerEspecialidadCienciasSaludGanadora();
-        //            if (espSalud != "SinDeterminar")
-        //                Console.WriteLine($"ESPECIALIDAD: {espSalud}");
-        //            break;
-        //        case "Ciencias Sociales":
-        //            var espSoc = resultado.Puntajes.ObtenerEspecialidadCienciasSocialesGanadora();
-        //            if (espSoc != "SinDeterminar")
-        //                Console.WriteLine($"ESPECIALIDAD: {espSoc}");
-        //            break;
-        //        case "Ciencias Naturales":
-        //            var espNat = resultado.Puntajes.ObtenerEspecialidadCienciasNaturalesGanadora();
-        //            if (espNat != "SinDeterminar")
-        //                Console.WriteLine($"ESPECIALIDAD: {espNat}");
-        //            break;
-        //        case "Ciencias de la Vida":
-        //            var espVida = resultado.Puntajes.ObtenerEspecialidadCienciasVidaGanadora();
-        //            if (espVida != "SinDeterminar")
-        //                Console.WriteLine($"ESPECIALIDAD: {espVida}");
-        //            break;
-        //    }
-        //}
-    }
-}
+    //    //    // Mostrar especialidad según el área ganadora
+    //    //    switch (resultado.AreaGanadora)
+    //    //    {
+    //    //        case "Ingenierías":
+    //    //            var espIng = resultado.Puntajes.ObtenerEspecialidadIngenieriaGanadora();
+    //    //            if (espIng != "SinDeterminar")
+    //    //                Console.WriteLine($"ESPECIALIDAD: {espIng}");
+    //    //            break;
+    //    //        case "Artes":
+    //    //            var espArt = resultado.Puntajes.ObtenerEspecialidadArtesGanadora();
+    //    //            if (espArt != "SinDeterminar")
+    //    //                Console.WriteLine($"ESPECIALIDAD: {espArt}");
+    //    //            break;
+    //    //        case "Humanidades":
+    //    //            var espHum = resultado.Puntajes.ObtenerEspecialidadHumanidadesGanadora();
+    //    //            if (espHum != "SinDeterminar")
+    //    //                Console.WriteLine($"ESPECIALIDAD: {espHum}");
+    //    //            break;
+    //    //        case "Ciencias de la Salud":
+    //    //            var espSalud = resultado.Puntajes.ObtenerEspecialidadCienciasSaludGanadora();
+    //    //            if (espSalud != "SinDeterminar")
+    //    //                Console.WriteLine($"ESPECIALIDAD: {espSalud}");
+    //    //            break;
+    //    //        case "Ciencias Sociales":
+    //    //            var espSoc = resultado.Puntajes.ObtenerEspecialidadCienciasSocialesGanadora();
+    //    //            if (espSoc != "SinDeterminar")
+    //    //                Console.WriteLine($"ESPECIALIDAD: {espSoc}");
+    //    //            break;
+    //    //        case "Ciencias Naturales":
+    //    //            var espNat = resultado.Puntajes.ObtenerEspecialidadCienciasNaturalesGanadora();
+    //    //            if (espNat != "SinDeterminar")
+    //    //                Console.WriteLine($"ESPECIALIDAD: {espNat}");
+    //    //            break;
+    //    //        case "Ciencias de la Vida":
+    //    //            var espVida = resultado.Puntajes.ObtenerEspecialidadCienciasVidaGanadora();
+    //    //            if (espVida != "SinDeterminar")
+    //    //                Console.WriteLine($"ESPECIALIDAD: {espVida}");
+    //    //            break;
+    //    //    }
+    //    //}
+    //}
+
