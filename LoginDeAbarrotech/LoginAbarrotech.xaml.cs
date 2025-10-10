@@ -69,8 +69,9 @@ namespace LoginDeAbarrotech
         private void btnRegistrarUsuario_Click(object sender, RoutedEventArgs e)
         {
 
-            MessageBox.Show("Se abrirá la ventana de registro de usuario");
+            RegistroUsuarios registroUsuarios = new RegistroUsuarios();
             this.Hide();
+            registroUsuarios.ShowDialog();
         }
     }
 }
