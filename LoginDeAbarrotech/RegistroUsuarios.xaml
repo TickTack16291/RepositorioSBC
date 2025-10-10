@@ -6,9 +6,8 @@
         xmlns:local="clr-namespace:LoginDeAbarrotech"
         mc:Ignorable="d"
         Title="RegistroEmpleados" Height="620" Width="500"
-        WindowStartupLocation="CenterScreen"
+        WindowStartupLocation="CenterScreen">
         
-        >
     <Grid Margin="0,0,0,-51">
         <!-- Fondo -->
         <Grid.Background>
