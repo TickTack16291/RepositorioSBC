@@ -24,9 +24,43 @@ namespace LoginDeAbarrotech
             InitializeComponent();
         }
 
+        private Usuario usuarioGenerico = new Usuario();
+        
+
         private void btn_Guardar_Click(object sender, RoutedEventArgs e)
         {
 
+            string usuario;
+            string nombre;
+            string contrasena;
+            string apellido_paterno;
+            string apellido_materno;
+            string preparatoria;
+            usuario = ct_Usuario.Text;
+            nombre = ct_Nombre.Text;
+            contrasena = ct_Contrasena.Password;
+            apellido_paterno = ct_ApellidoPaterno.Text;
+            apellido_materno = ct_ApellidoMaterno.Text;
+            preparatoria = ct_PreparatoriaOrigen.Text;
+
+            usuarioGenerico.usuario = usuario;
+            usuarioGenerico.nombre = nombre;
+            usuarioGenerico.contrasena = contrasena;
+            usuarioGenerico.apellido_paterno = apellido_paterno;
+            usuarioGenerico.apellido_materno= apellido_materno;
+            usuarioGenerico.preparatoria_origen = preparatoria;
+
+            ConexionBD conexion = new ConexionBD();
+            bool aux = conexion.ingresar_usuarios(usuarioGenerico);
+            if (aux)
+            {
+                MessageBox.Show("Usuario registrado con exito");
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Error al registrar el usuario");
+            }
 
 
         }

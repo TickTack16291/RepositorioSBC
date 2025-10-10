@@ -88,15 +88,18 @@ namespace LoginDeAbarrotech
                 {
                     conexion.Open();
 
-                    string sql = @"INSERT INTO usuarios (id_empleado, usuario, contrasena, rol_usuario)
-                                   VALUES (@id_empleado, @usuario, @contrasena, @rol_usuario)";
+                    string sql = @"INSERT INTO usuarios 
+                (usuario, contrasena, nombre, apellido_paterno, apellido_materno, preparatoria_origen)
+                VALUES (@usuario, @contrasena, @nombre, @apellido_paterno, @apellido_materno, @preparatoria_origen)";
 
                     using (var command = new MySqlCommand(sql, conexion))
                     {
-                        command.Parameters.AddWithValue("@id_empleado", usuarioAux.id_empleado);
                         command.Parameters.AddWithValue("@usuario", usuarioAux.usuario);
                         command.Parameters.AddWithValue("@contrasena", usuarioAux.contrasena);
-                        command.Parameters.AddWithValue("@rol_usuario", usuarioAux.rol_usuario);
+                        command.Parameters.AddWithValue("@nombre", usuarioAux.nombre);
+                        command.Parameters.AddWithValue("@apellido_paterno", usuarioAux.apellido_paterno);
+                        command.Parameters.AddWithValue("@apellido_materno", usuarioAux.apellido_materno);
+                        command.Parameters.AddWithValue("@preparatoria_origen", usuarioAux.preparatoria_origen);
 
                         int result = command.ExecuteNonQuery();
                         return result > 0;
