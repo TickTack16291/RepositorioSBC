@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LoginDeAbarrotech"
         mc:Ignorable="d"
-        Title="RegistroEmpleados" Height="600" Width="500">
+        Title="RegistroEmpleados" Height="620" Width="500"
+        WindowStartupLocation="CenterScreen"
+        >
     <Grid Margin="0,0,0,-51">
         <!-- Fondo -->
         <Grid.Background>
@@ -16,7 +18,7 @@
         </Grid.Background>
 
         <!--Contenedor principal con Scroll-->
-        <Border Background="White" CornerRadius="20" Padding="30" Width="400" Height="561"
+        <Border Background="White" CornerRadius="20" Padding="30" Width="400" Height="580"
                 HorizontalAlignment="Center" VerticalAlignment="Center">
             <Border.Effect>
                 <DropShadowEffect Color="Black" BlurRadius="15" ShadowDepth="5"/>
@@ -34,32 +36,32 @@
                                 Width="320" Margin="0,40,0,0">
                         <!-- Usuario -->
                         <TextBlock Text="Usuario" Foreground="#424242" Margin="5,0,0,3"/>
-                        <TextBox x:Name="ct_Usuario" Margin="0,0,0,15" Height="35" Padding="10"
+                        <TextBox x:Name="ct_Usuario" Margin="0,0,0,15" Height="37" Padding="10"
                              BorderBrush="#1976D2" BorderThickness="2" MaxLength="15"/>
 
                         <!-- Contraseña -->
                         <TextBlock Text="Contraseña" Foreground="#424242" Margin="5,0,0,3"/>
-                        <PasswordBox x:Name="ct_Contrasena" Margin="0,0,0,15" Height="35" Padding="10"
+                        <PasswordBox x:Name="ct_Contrasena" Margin="0,0,0,15" Height="37" Padding="10"
                              BorderBrush="#1976D2" BorderThickness="2" MaxLength="5"/>
 
                         <!-- Nombre -->
                         <TextBlock Text="Nombre" Foreground="#424242" Margin="5,0,0,3"/>
-                        <TextBox x:Name="ct_Nombre" Margin="0,0,0,15" Height="35" Padding="10"
+                        <TextBox x:Name="ct_Nombre" Margin="0,0,0,15" Height="37" Padding="10"
                              BorderBrush="#1976D2" BorderThickness="2" MaxLength="25"/>
 
                         <!-- Apellido Paterno -->
                         <TextBlock Text="Apellido Paterno" Foreground="#424242" Margin="5,0,0,3"/>
-                        <TextBox x:Name="ct_ApellidoPaterno" Margin="0,0,0,15" Height="35" Padding="10"
+                        <TextBox x:Name="ct_ApellidoPaterno" Margin="0,0,0,15" Height="37" Padding="10"
                              BorderBrush="#1976D2" BorderThickness="2" MaxLength="25"/>
 
                         <!-- Apellido Materno -->
                         <TextBlock Text="Apellido Materno" Foreground="#424242" Margin="5,0,0,3"/>
-                        <TextBox x:Name="ct_ApellidoMaterno" Margin="0,0,0,15" Height="35" Padding="10"
+                        <TextBox x:Name="ct_ApellidoMaterno" Margin="0,0,0,15" Height="37" Padding="10"
                              BorderBrush="#1976D2" BorderThickness="2" MaxLength="25"/>
 
                         <!-- Preparatoria de Origen -->
                         <TextBlock Text="Preparatoria de Origen" Foreground="#424242" Margin="5,0,0,3"/>
-                        <TextBox x:Name="ct_PreparatoriaOrigen" Margin="0,0,0,15" Height="35" Padding="10"
+                        <TextBox x:Name="ct_PreparatoriaOrigen" Margin="0,0,0,15" Height="37" Padding="10"
                              BorderBrush="#1976D2" BorderThickness="2" MaxLength="50"/>
                     </StackPanel>
 

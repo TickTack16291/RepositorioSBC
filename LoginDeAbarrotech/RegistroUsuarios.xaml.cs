@@ -25,10 +25,39 @@ namespace LoginDeAbarrotech
         }
 
         private Usuario usuarioGenerico = new Usuario();
-        
+
 
         private void btn_Guardar_Click(object sender, RoutedEventArgs e)
         {
+            ConexionBD conexion = new ConexionBD();
+            string usuario;
+            string nombre;
+            string contrasena;
+            string apellido_paterno;
+            string apellido_materno;
+            string preparatoria;
+            usuario = ct_Usuario.Text;
+            nombre = ct_Nombre.Text;
+            contrasena = ct_Contrasena.Password;
+            apellido_paterno = ct_ApellidoPaterno.Text;
+            apellido_materno = ct_ApellidoMaterno.Text;
+            preparatoria = ct_PreparatoriaOrigen.Text;
+
+            usuarioGenerico.usuario = usuario;
+            usuarioGenerico.nombre = nombre;
+            usuarioGenerico.contrasena = contrasena;
+            usuarioGenerico.apellido_paterno = apellido_paterno;
+            usuarioGenerico.apellido_materno = apellido_materno;
+            usuarioGenerico.preparatoria_origen = preparatoria;
+            bool repetido = conexion.validar_usuarios_repetidos(usuarioGenerico.usuario);
+            if (repetido)
+            {
+                MessageBox.Show("El usuario ya existe, ingrese otro");
+                ct_Usuario.Clear();
+                ct_Usuario.Focus();
+                return;
+            }
+            else { 
 
             string usuario;
             string nombre;
@@ -60,6 +89,18 @@ namespace LoginDeAbarrotech
             else
             {
                 MessageBox.Show("Error al registrar el usuario");
+            }
+
+            bool aux = conexion.ingresar_usuarios(usuarioGenerico);
+            if (aux)
+            {
+                MessageBox.Show("Usuario registrado con exito");
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Error al registrar el usuario");
+            }
             }
 
 
