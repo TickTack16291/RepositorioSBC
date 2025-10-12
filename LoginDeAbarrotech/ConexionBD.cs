@@ -22,6 +22,54 @@ namespace LoginDeAbarrotech
         {
 
         }
+        public bool agregar_area_enfasis(Usuario usuario)
+        {
+            using (var conexion = new MySqlConnection(conexionString))
+            {
+                try
+                {
+                    conexion.Open();
+                    string sql = "UPDATE usuarios SET diagnostico_area = @diagnostico_area WHERE usuario = @usuario";
+                    using (var command = new MySqlCommand(sql, conexion))
+                    {
+                        command.Parameters.AddWithValue("@usuario", usuario.usuario);
+                        command.Parameters.AddWithValue("@diagnostico_area", usuario.diagnostico_area);
+                        int result = command.ExecuteNonQuery();
+                        return result > 0;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al agregar el area de enfasis a la base de datos: " + ex.Message);
+                    return false;
+
+                }
+            }
+        }
+        public bool agregar_carrera(Usuario usuario)
+        {
+            using (var conexion = new MySqlConnection(conexionString))
+            {
+                try
+                {
+                    conexion.Open();
+                    string sql = "UPDATE usuarios SET diagnostico_carrera = @diagnostico_carrera WHERE usuario = @usuario";
+                    using (var command = new MySqlCommand(sql, conexion))
+                    {
+                        command.Parameters.AddWithValue("@usuario", usuario.usuario);
+                        command.Parameters.AddWithValue("@diagnostico_carrera", usuario.diagnostico_carrera);
+                        int result = command.ExecuteNonQuery();
+                        return result > 0;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al agregar el area de enfasis a la base de datos: " + ex.Message);
+                    return false;
+
+                }
+            }
+        }
 
         public bool validar_inicio_sesion(string usuario, string contrasena)
         {

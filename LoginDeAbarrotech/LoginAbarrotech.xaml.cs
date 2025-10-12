@@ -40,8 +40,11 @@ namespace LoginDeAbarrotech
                 bool aux = conexion.validar_inicio_sesion(usuarioAux, contrasenaAux);
                 if (aux)
                 {
+                    Usuario usuario = new Usuario();
+                    usuario.usuario = usuarioAux;
+                    usuario.contrasena = contrasenaAux;
                     // Aqui debe abrir un el menu de operciones
-                    PreguntasArea ventanaPreguntas = new PreguntasArea();
+                    PreguntasArea ventanaPreguntas = new PreguntasArea(usuario);
                     this.Close();
                     ventanaPreguntas.Show();
                 }

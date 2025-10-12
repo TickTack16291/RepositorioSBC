@@ -19,6 +19,7 @@ namespace LoginDeAbarrotech
         public PreguntasArea(Usuario usuario)
         {
             InitializeComponent();
+            this.usuario = usuario;
             _servicio = new ServicioOrientacionVocacional();
             InitializeQuestions();
         }
@@ -40,7 +41,7 @@ namespace LoginDeAbarrotech
         //    }
         //}
 
-
+        private Usuario usuario;
         private ServicioOrientacionVocacional _servicio;
         private List<ComboBox> answerComboBoxes = new List<ComboBox>();
         private const int totalQuestions = 10;
@@ -192,6 +193,9 @@ namespace LoginDeAbarrotech
             }
             else
             {
+                ConexionBD conexion = new ConexionBD();
+                usuario.diagnostico_area = resultado.Areas[0];
+                conexion.agregar_area_enfasis(usuario);
                 //Navegar al area ganadora
                 NavegarAPreguntasEspecificas(resultado.Areas[0]);
             }
