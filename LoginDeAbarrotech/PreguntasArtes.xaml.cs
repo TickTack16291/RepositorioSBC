@@ -11,12 +11,14 @@ namespace LoginDeAbarrotech
     /// </summary>
     public partial class PreguntasArtes : Page
     {
-        public PreguntasArtes(ServicioOrientacionVocacional servicio)
+        public PreguntasArtes(ServicioOrientacionVocacional servicio, Usuario usuario)
         {
             InitializeComponent();
             InitializeQuestions();
             _servicio = servicio;
+            this._usuario = usuario;
         }
+        private Usuario _usuario;
         private ServicioOrientacionVocacional _servicio;
         private List<ComboBox> answerComboBoxes = new List<ComboBox>();
         private const int totalQuestions = 5;
