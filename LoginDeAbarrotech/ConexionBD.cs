@@ -44,6 +44,10 @@ namespace LoginDeAbarrotech
                     return false;
 
                 }
+                finally
+                {
+                    conexion.Close();
+                }
             }
         }
         public bool agregar_carrera(Usuario usuario)
@@ -61,6 +65,7 @@ namespace LoginDeAbarrotech
                         int result = command.ExecuteNonQuery();
                         return result > 0;
                     }
+                    
                 }
                 catch (Exception ex)
                 {
@@ -68,6 +73,10 @@ namespace LoginDeAbarrotech
                     return false;
 
                 }
+                finally {     
+                    conexion.Close();
+                }
+
             }
         }
 
@@ -98,6 +107,10 @@ namespace LoginDeAbarrotech
                     MessageBox.Show("Error al validar el inicio de sesion con la base de datos: " + ex.Message);
                     return false;
                 }
+                finally
+                {
+                    conexion.Close();
+                }
             }
         }
         public bool validar_usuarios_repetidos(string usuario)
@@ -125,6 +138,10 @@ namespace LoginDeAbarrotech
                 {
                     MessageBox.Show("Error al validar el usuario en la base de datos: " + ex.Message);
                     return false;
+                }
+                finally
+                {
+                    conexion.Close();
                 }
             }
         }
@@ -157,6 +174,10 @@ namespace LoginDeAbarrotech
                 {
                     MessageBox.Show("Error al ingresar el usuario a la base de datos: " + ex.Message);
                     return false;
+                }
+                finally
+                {
+                    conexion.Close();
                 }
             }
         }
@@ -192,6 +213,10 @@ namespace LoginDeAbarrotech
                 {
                     MessageBox.Show("Error al modificar el usuario en la base de datos: " + ex.Message);
                     return false;
+                }
+                finally
+                {
+                    conexion.Close();
                 }
             }
         }
@@ -238,6 +263,10 @@ namespace LoginDeAbarrotech
                 {
                     MessageBox.Show("Error al obtener los datos del usuario desde la base de datos: " + ex.Message);
                     return (false, null);
+                }
+                finally
+                {
+                    conexion.Close();
                 }
             }
         }
