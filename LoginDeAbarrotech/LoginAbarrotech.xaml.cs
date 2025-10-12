@@ -47,6 +47,7 @@ namespace LoginDeAbarrotech
                 }
                 else
                 {
+                    Lbl_error.Content = "Usuario o contraseña incorrectos";
                     Lbl_error.Visibility = Visibility.Visible;
                     txtUsuario.Focus();
                     var animacion = new System.Windows.Media.Animation.ThicknessAnimation();
@@ -72,6 +73,10 @@ namespace LoginDeAbarrotech
             RegistroUsuarios registroUsuarios = new RegistroUsuarios();
             this.Hide();
             registroUsuarios.ShowDialog();
+            if(registroUsuarios.DialogResult == true)
+            {
+                this.Show();
+            }
         }
     }
 }

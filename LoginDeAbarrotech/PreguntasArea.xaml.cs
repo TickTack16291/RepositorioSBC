@@ -16,7 +16,7 @@ namespace LoginDeAbarrotech
 
        
        
-        public PreguntasArea()
+        public PreguntasArea(Usuario usuario)
         {
             InitializeComponent();
             _servicio = new ServicioOrientacionVocacional();

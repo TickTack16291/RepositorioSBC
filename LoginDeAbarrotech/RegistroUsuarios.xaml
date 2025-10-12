@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:LoginDeAbarrotech"
         mc:Ignorable="d"
         Title="RegistroEmpleados" Height="620" Width="500"
-        WindowStartupLocation="CenterScreen">
-        
+        WindowStartupLocation="CenterScreen"
+        Closing="Window_Closing">
+
     <Grid Margin="0,0,0,-51">
         <!-- Fondo -->
         <Grid.Background>
@@ -33,16 +34,16 @@
 
                     <!-- Campos del formulario -->
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" 
-                                Width="320" Margin="0,40,0,0">
+                                Width="320" Margin="0,40,0,0" Height="437">
                         <!-- Usuario -->
                         <TextBlock Text="Usuario" Foreground="#424242" Margin="5,0,0,3"/>
                         <TextBox x:Name="ct_Usuario" Margin="0,0,0,15" Height="37" Padding="10"
-                             BorderBrush="#1976D2" BorderThickness="2" MaxLength="15"/>
+                             BorderBrush="#1976D2" BorderThickness="2" MaxLength="15" TextChanged="ct_Usuario_TextChanged"/>
 
                         <!-- Contraseña -->
                         <TextBlock Text="Contraseña" Foreground="#424242" Margin="5,0,0,3"/>
                         <PasswordBox x:Name="ct_Contrasena" Margin="0,0,0,15" Height="37" Padding="10"
-                             BorderBrush="#1976D2" BorderThickness="2" MaxLength="5"/>
+                             BorderBrush="#1976D2" BorderThickness="2" MaxLength="8"/>
 
                         <!-- Nombre -->
                         <TextBlock Text="Nombre" Foreground="#424242" Margin="5,0,0,3"/>
@@ -61,9 +62,15 @@
 
                         <!-- Preparatoria de Origen -->
                         <TextBlock Text="Preparatoria de Origen" Foreground="#424242" Margin="5,0,0,3"/>
-                        <TextBox x:Name="ct_PreparatoriaOrigen" Margin="0,0,0,15" Height="37" Padding="10"
-                             BorderBrush="#1976D2" BorderThickness="2" MaxLength="50"/>
+                        <TextBox x:Name="ct_PreparatoriaOrigen" Margin="0,0,0,5" Height="37" Padding="10"
+                             BorderBrush="#1976D2" BorderThickness="2" MaxLength="50" TextChanged="ct_PreparatoriaOrigen_TextChanged"/>
+                        <!-- Label de errores (ahora justo arriba de los botones) -->
+                        <Label x:Name="Lbl_error" Content="Mensajes de error" Foreground="Red" FontWeight="Bold"
+                         HorizontalAlignment="Center" Margin="0,0,0,70"
+                         Visibility="Visible" Width="320" Height="30"/>
                     </StackPanel>
+
+
 
                     <!-- Botones -->
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,20,0,0">
@@ -72,9 +79,9 @@
                                 Click="btn_Cancelar_Click"/>
                         <Button x:Name="btn_Guardar" Content="Guardar" Background="#4CAF50" Foreground="White"
                                 Height="35" Width="100" FontWeight="Bold" Margin="10,0,10,0"
-                                Click="btn_Guardar_Click"/>
-                        <Button x:Name="btn_Modificar" Content="Modificar" Background="#1976D2"  Foreground="White"
-                                Height="35" Width="100" FontWeight="Bold" Margin="10,0,10,0"
+                                Click="btn_Guardar_Click" HorizontalAlignment="Center"/>
+                        <Button x:Name="btn_Modificar" Content="Mod. usuario" Background="#1976D2"  Foreground="White"
+                                Height="35" Width="99" FontWeight="Bold" Margin="10,0,10,0"
                                 Click="btn_Modificar_Click"/>
                     </StackPanel>
 

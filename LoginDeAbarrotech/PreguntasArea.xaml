@@ -49,6 +49,6 @@
               FontSize="12"
               Background="#3498DB"
               Foreground="White"
-              BorderBrush="#2980B9" Grid.RowSpan="2" VerticalAlignment="Bottom"/>
+              BorderBrush="#2980B9" VerticalAlignment="Top" Margin="0,343,0,0"/>
     </Grid>
 </Window>

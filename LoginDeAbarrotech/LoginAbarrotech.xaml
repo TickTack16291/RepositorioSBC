@@ -72,7 +72,7 @@
                 password box es lo mismo que textbox solo que oculta los caracteres al ser una contraseña-->
                 <TextBlock Text="Contraseña" Foreground="#424242" Margin="5,0,0,3"/>
                 <PasswordBox x:Name="txtPassword" Margin="0,0,0,20" Height="40" Padding="10"
-                         BorderBrush="#1976D2" BorderThickness="2">
+                         BorderBrush="#1976D2" BorderThickness="2" MaxLength="8">
                     <PasswordBox.Style>
                         <Style TargetType="PasswordBox">
 
@@ -129,7 +129,7 @@
                             </EventTrigger>
                         </Button.Triggers>
                     </Button>
-                    <Button x:Name="btnRegistrarUsusario" Content="Registrarse" Background="BlueViolet" Foreground="White"
+                    <Button x:Name="btnRegistrarUsusario" Content="Registrarse/Modificar" Background="BlueViolet" Foreground="White"
     Height="40" FontWeight="Bold" Margin="0,10,0,0" Click="btnRegistrarUsuario_Click">
                             <Button.Style>
                                 <Style TargetType="{x:Type Button}">
