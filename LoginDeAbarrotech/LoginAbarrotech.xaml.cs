@@ -22,7 +22,7 @@ namespace LoginDeAbarrotech
 
             if (usuarioAux == "" || contrasenaAux == "")// Campos vacios
             {
-                Lbl_error.Content = "No puede haber campos vacios";
+                Lbl_error.Content = "No puede haber campos vacíos";
                 Lbl_error.Visibility = Visibility.Visible;
                 txtUsuario.Focus();
                 var animacion = new System.Windows.Media.Animation.ThicknessAnimation();
@@ -36,15 +36,21 @@ namespace LoginDeAbarrotech
             else
             {
                 ConexionBD conexion = new ConexionBD();
-
-                bool aux = conexion.validar_inicio_sesion(usuarioAux, contrasenaAux);
-                if (aux)
+                var (existe, usuarioObj) = conexion.validar_inicio_sesion_completo(usuarioAux, contrasenaAux);
+                if (existe)
                 {
-                    Usuario usuario = new Usuario();
-                    usuario.usuario = usuarioAux;
-                    usuario.contrasena = contrasenaAux;
-                    // Aqui debe abrir un el menu de operciones
-                    PreguntasArea ventanaPreguntas = new PreguntasArea(usuario);
+                    // Validación para usuario Experto
+                    if (usuarioObj.id_usuario == 1 && usuarioObj.usuario == "Experto" && usuarioObj.contrasena == contrasenaAux)
+                    {
+                        var usuarios = conexion.obtener_todos_los_usuarios();
+                        SeleccionUsuarioComentarioWindow ventanaComentarios = new SeleccionUsuarioComentarioWindow(usuarios);
+                        this.Hide();
+                        ventanaComentarios.ShowDialog();
+                        this.Show();
+                        return;
+                    }
+                    // Inicio normal
+                    PreguntasArea ventanaPreguntas = new PreguntasArea(usuarioObj);
                     this.Close();
                     ventanaPreguntas.Show();
                 }

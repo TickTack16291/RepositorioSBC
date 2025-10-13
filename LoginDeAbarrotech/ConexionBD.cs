@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Windows;
+using System.Collections.Generic;
 
 
 /// <summary>
@@ -263,6 +264,127 @@ namespace LoginDeAbarrotech
                 {
                     MessageBox.Show("Error al obtener los datos del usuario desde la base de datos: " + ex.Message);
                     return (false, null);
+                }
+                finally
+                {
+                    conexion.Close();
+                }
+            }
+        }
+
+        public (bool, Usuario) validar_inicio_sesion_completo(string usuario, string contrasena)
+        {
+            using (var conexion = new MySqlConnection(conexionString))
+            {
+                try
+                {
+                    conexion.Open();
+                    string sql = "SELECT * FROM usuarios WHERE usuario = @usuario AND contrasena = @contrasena";
+                    using (var command = new MySqlCommand(sql, conexion))
+                    {
+                        command.Parameters.AddWithValue("@usuario", usuario);
+                        command.Parameters.AddWithValue("@contrasena", contrasena);
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                Usuario usuarioObtenido = new Usuario
+                                {
+                                    id_usuario = reader.GetInt32("id_usuario"),
+                                    usuario = reader.GetString("usuario"),
+                                    contrasena = reader.GetString("contrasena"),
+                                    nombre = reader.GetString("nombre"),
+                                    apellido_paterno = reader.GetString("apellido_paterno"),
+                                    apellido_materno = reader.GetString("apellido_materno"),
+                                    preparatoria_origen = reader.GetString("preparatoria_origen"),
+                                    diagnostico_area = reader.IsDBNull(reader.GetOrdinal("diagnostico_area")) ? null : reader.GetString("diagnostico_area"),
+                                    diagnostico_carrera = reader.IsDBNull(reader.GetOrdinal("diagnostico_carrera")) ? null : reader.GetString("diagnostico_carrera"),
+                                    comentarios = reader.IsDBNull(reader.GetOrdinal("comentarios")) ? null : reader.GetString("comentarios")
+                                };
+                                return (true, usuarioObtenido);
+                            }
+                            else
+                            {
+                                return (false, null);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al validar el inicio de sesión: " + ex.Message);
+                    return (false, null);
+                }
+                finally
+                {
+                    conexion.Close();
+                }
+            }
+        }
+
+        public List<Usuario> obtener_todos_los_usuarios()
+        {
+            var usuarios = new List<Usuario>();
+            using (var conexion = new MySqlConnection(conexionString))
+            {
+                try
+                {
+                    conexion.Open();
+                    // Excluir al usuario Experto (id_usuario = 1 y usuario = 'Experto')
+                    string sql = "SELECT * FROM usuarios WHERE NOT (id_usuario = 1 AND usuario = 'Experto')";
+                    using (var command = new MySqlCommand(sql, conexion))
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            usuarios.Add(new Usuario
+                            {
+                                id_usuario = reader.GetInt32("id_usuario"),
+                                usuario = reader.GetString("usuario"),
+                                contrasena = reader.GetString("contrasena"),
+                                nombre = reader.GetString("nombre"),
+                                apellido_paterno = reader.GetString("apellido_paterno"),
+                                apellido_materno = reader.GetString("apellido_materno"),
+                                preparatoria_origen = reader.GetString("preparatoria_origen"),
+                                diagnostico_area = reader.IsDBNull(reader.GetOrdinal("diagnostico_area")) ? null : reader.GetString("diagnostico_area"),
+                                diagnostico_carrera = reader.IsDBNull(reader.GetOrdinal("diagnostico_carrera")) ? null : reader.GetString("diagnostico_carrera"),
+                                comentarios = reader.IsDBNull(reader.GetOrdinal("comentarios")) ? null : reader.GetString("comentarios")
+                            });
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al obtener la lista de usuarios: " + ex.Message);
+                }
+                finally
+                {
+                    conexion.Close();
+                }
+            }
+            return usuarios;
+        }
+
+        public bool agregar_comentario_usuario(int id_usuario, string comentario)
+        {
+            using (var conexion = new MySqlConnection(conexionString))
+            {
+                try
+                {
+                    conexion.Open();
+                    string sql = "UPDATE usuarios SET comentarios = @comentarios WHERE id_usuario = @id_usuario";
+                    using (var command = new MySqlCommand(sql, conexion))
+                    {
+                        command.Parameters.AddWithValue("@comentarios", comentario);
+                        command.Parameters.AddWithValue("@id_usuario", id_usuario);
+                        int result = command.ExecuteNonQuery();
+                        return result > 0;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al agregar el comentario al usuario: " + ex.Message);
+                    return false;
                 }
                 finally
                 {

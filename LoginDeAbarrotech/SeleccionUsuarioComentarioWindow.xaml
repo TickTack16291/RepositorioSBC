@@ -1,0 +1,59 @@
+﻿<Window x:Class="LoginDeAbarrotech.SeleccionUsuarioComentarioWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Seleccionar Usuario para Comentario" Height="540" Width="1050"
+        WindowStartupLocation="CenterScreen">
+    <Grid Background="#F5F5F5">
+        <Border Background="White" CornerRadius="16" Padding="18" Margin="18">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="320"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <!-- Panel de datos personales y comentarios -->
+                <StackPanel Grid.Column="0" Margin="0,0,18,0">
+                    <TextBlock Text="Datos del usuario seleccionado" FontSize="16" FontWeight="Bold"
+                               Foreground="#1976D2" Margin="0,0,0,12"/>
+                    <TextBlock Text="Nombre:" FontWeight="Bold" Margin="0,0,0,2"/>
+                    <TextBox x:Name="txtNombre" IsReadOnly="True" Margin="0,0,0,8"/>
+                    <TextBlock Text="Apellido Paterno:" FontWeight="Bold" Margin="0,0,0,2"/>
+                    <TextBox x:Name="txtApellidoPaterno" IsReadOnly="True" Margin="0,0,0,8"/>
+                    <TextBlock Text="Apellido Materno:" FontWeight="Bold" Margin="0,0,0,2"/>
+                    <TextBox x:Name="txtApellidoMaterno" IsReadOnly="True" Margin="0,0,0,8"/>
+                    <TextBlock Text="Preparatoria de Origen:" FontWeight="Bold" Margin="0,0,0,2"/>
+                    <TextBox x:Name="txtPreparatoriaOrigen" IsReadOnly="True" Margin="0,0,0,12"/>
+                    <TextBlock Text="Comentario:" FontWeight="Bold" Margin="0,0,0,2"/>
+                    <TextBox x:Name="txtComentario" AcceptsReturn="True" Height="90" TextWrapping="Wrap"
+                             VerticalScrollBarVisibility="Auto" Margin="0,0,0,8"/>
+                    <Button x:Name="btnGuardarComentario" Content="Guardar Comentario" Width="160" Height="36"
+                            Background="#4CAF50" Foreground="White" FontWeight="Bold" Margin="0,8,0,0"
+                            Click="btnGuardarComentario_Click"/>
+                    <Label x:Name="Lbl_error" Content="" Foreground="Red" FontWeight="Bold"
+                           HorizontalAlignment="Left" Visibility="Collapsed" Margin="0,10,0,0"/>
+                </StackPanel>
+                <!-- Tabla de usuarios -->
+                <StackPanel Grid.Column="1">
+                    <TextBlock Text="Selecciona un usuario para agregar comentario" FontSize="20" FontWeight="Bold"
+                               Foreground="#1976D2" HorizontalAlignment="Center" Margin="0,0,0,12"/>
+                    <DataGrid x:Name="dgUsuarios" AutoGenerateColumns="False" Height="320" Margin="0,0,0,10"
+                              IsReadOnly="True" SelectionMode="Single" CanUserAddRows="False"
+                              SelectionChanged="dgUsuarios_SelectionChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding id_usuario}" Width="50"/>
+                            <DataGridTextColumn Header="Nombre" Binding="{Binding nombre}" Width="120"/>
+                            <DataGridTextColumn Header="Apellido Paterno" Binding="{Binding apellido_paterno}" Width="120"/>
+                            <DataGridTextColumn Header="Apellido Materno" Binding="{Binding apellido_materno}" Width="120"/>
+                            <DataGridTextColumn Header="Preparatoria Origen" Binding="{Binding preparatoria_origen}" Width="120"/>
+                            <DataGridTextColumn Header="Diagnóstico Área" Binding="{Binding diagnostico_area}" Width="120"/>
+                            <DataGridTextColumn Header="Diagnóstico Carrera" Binding="{Binding diagnostico_carrera}" Width="120"/>
+                            <DataGridTextColumn Header="Comentario Asignado" Binding="{Binding comentarioAsignado}" Width="120"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button x:Name="btnCerrar" Content="Cerrar" Width="110" Height="36"
+                            Background="#E53935" Foreground="White" FontWeight="Bold" Margin="0,10,0,0"
+                            HorizontalAlignment="Center" Click="btnCerrar_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
