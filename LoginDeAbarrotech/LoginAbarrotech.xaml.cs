@@ -72,19 +72,63 @@ namespace LoginDeAbarrotech
 
         private void btn_Cerrar_Click(object sender, RoutedEventArgs e)
         {
-
             this.Close();
         }
 
         private void btnRegistrarUsuario_Click(object sender, RoutedEventArgs e)
         {
-
             RegistroUsuarios registroUsuarios = new RegistroUsuarios();
             this.Hide();
             registroUsuarios.ShowDialog();
             if(registroUsuarios.DialogResult == true)
             {
                 this.Show();
+            }
+        }
+
+        // NUEVO MÉTODO: Ver información de usuarios
+        private void btnVerUsuarios_Click(object sender, RoutedEventArgs e)
+        {
+            string usuarioAux = txtUsuario.Text;
+            string contrasenaAux = txtPassword.Password;
+
+            if (string.IsNullOrWhiteSpace(usuarioAux) || string.IsNullOrWhiteSpace(contrasenaAux))
+            {
+                Lbl_error.Content = "No puede haber campos vacios";
+                Lbl_error.Visibility = Visibility.Visible;
+                txtUsuario.Focus();
+                var animacion = new System.Windows.Media.Animation.ThicknessAnimation();
+                animacion.Duration = TimeSpan.FromMilliseconds(100);
+                animacion.From = new Thickness(0);
+                animacion.To = new Thickness(5);
+                animacion.AutoReverse = true;
+                animacion.RepeatBehavior = new System.Windows.Media.Animation.RepeatBehavior(2);
+                Lbl_error.BeginAnimation(MarginProperty, animacion);
+                return;
+            }
+
+            ConexionBD conexion = new ConexionBD();
+            var (existe, usuarioObj) = conexion.validar_inicio_sesion_completo(usuarioAux, contrasenaAux);
+            
+            if (existe)
+            {
+                var ventanaVisualizacion = new VisualizacionUsuariosWindow(usuarioObj);
+                this.Hide();
+                ventanaVisualizacion.ShowDialog();
+                this.Show();
+            }
+            else
+            {
+                Lbl_error.Content = "Usuario o Contraseña incorrectos";
+                Lbl_error.Visibility = Visibility.Visible;
+                txtUsuario.Focus();
+                var animacion = new System.Windows.Media.Animation.ThicknessAnimation();
+                animacion.Duration = TimeSpan.FromMilliseconds(100);
+                animacion.From = new Thickness(0);
+                animacion.To = new Thickness(5);
+                animacion.AutoReverse = true;
+                animacion.RepeatBehavior = new System.Windows.Media.Animation.RepeatBehavior(2);
+                Lbl_error.BeginAnimation(MarginProperty, animacion);
             }
         }
     }
