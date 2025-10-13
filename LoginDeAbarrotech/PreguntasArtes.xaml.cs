@@ -169,7 +169,10 @@ namespace LoginDeAbarrotech
             {
                 mensajeResultados += $"{resultado.Key}: {resultado.Value}\n";
             }
-
+            _usuario.diagnostico_carrera = resultados["Especialidad en Artes"];
+            ConexionBD conexion = new ConexionBD();
+            conexion.agregar_carrera(_usuario);
+            ///resultados[$"Especialidad en {area}"] = especialidad;
             MessageBox.Show(mensajeResultados, "Resultados de Orientación Vocacional");
 
             // Aquí puedes navegar a una página de resultados finales

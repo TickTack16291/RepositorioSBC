@@ -185,6 +185,9 @@ namespace LoginDeAbarrotech
             {
                 mensajeResultados += $"{resultado.Key}: {resultado.Value}\n";
             }
+            _usuario.diagnostico_carrera = resultados["Especialidad en Ciencias de la Vida"];
+            ConexionBD conexion = new ConexionBD();
+            conexion.agregar_carrera(_usuario);
 
             MessageBox.Show(mensajeResultados, "Resultados de Orientación Vocacional");
 

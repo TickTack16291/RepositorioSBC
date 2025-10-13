@@ -228,14 +228,14 @@ namespace LoginDeAbarrotech
                 // Determinar qué página cargar según el área
                 Page paginaEspecifica = area switch
                 {
-                    "Ingenierías" => new PreguntasIngenierias(_servicio),
-                    "Ciencias de la Salud" => new PreguntasSalud(_servicio),
-                    "Artes" => new PreguntasArtes(_servicio),
-                    "Humanidades" => new PreguntasHumanidades(_servicio),
-                    "Ciencias Sociales" => new PreguntasSociales(_servicio),
-                    "Ciencias Naturales" => new PreguntasCNaturales(_servicio),
-                    "Ciencias de la Vida" => new PreguntasCVida(_servicio),
-                    _ => new PreguntasIngenierias(_servicio) // Default
+                    "Ingenierías" => new PreguntasIngenierias(_servicio, this.usuario),
+                    "Ciencias de la Salud" => new PreguntasSalud(_servicio, this.usuario),
+                    "Artes" => new PreguntasArtes(_servicio, this.usuario),
+                    "Humanidades" => new PreguntasHumanidades(_servicio, this.usuario),
+                    "Ciencias Sociales" => new PreguntasSociales(_servicio, this.usuario),
+                    "Ciencias Naturales" => new PreguntasCNaturales(_servicio, this.usuario),
+                    "Ciencias de la Vida" => new PreguntasCVida(_servicio, this.usuario),
+                    _ => new PreguntasIngenierias(_servicio, this.usuario) // Default
                 };
 
                 // Crear una nueva ventana para las preguntas específicas
