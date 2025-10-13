@@ -102,8 +102,8 @@ namespace LoginDeAbarrotech
             }
 
             //agregar puntajes detallados si se necesitan
-            resultados["Puntaje Ingenierías"] = _puntajesActuales.puntajeIngenieria.ToString();
-            resultados["Puntaje Ciencias de la Salud"] = _puntajesActuales.puntajeCienciasSalud.ToString();
+            //resultados["Puntaje Ingenierías"] = _puntajesActuales.puntajeIngenieria.ToString();
+            //resultados["Puntaje Ciencias de la Salud"] = _puntajesActuales.puntajeCienciasSalud.ToString();
             ///quiza haya que aregar mas si se necestan
             ///
             return resultados;

@@ -1,0 +1,25 @@
+﻿<Window x:Class="LoginDeAbarrotech.ResultadosOrientacionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LoginDeAbarrotech"
+        mc:Ignorable="d"
+        Title="ResultadosOrientacionWindow" Height="450" Width="800">
+    <Grid Background="#F5F5F5">
+        <Border Background="White" CornerRadius="18" Padding="24" Margin="20">
+            <Border.Effect>
+                <DropShadowEffect Color="Black" BlurRadius="15" ShadowDepth="5"/>
+            </Border.Effect>
+            <StackPanel>
+                <TextBlock Text="Resultados de Orientación Vocacional" FontSize="22" FontWeight="Bold"
+                       Foreground="#1976D2" HorizontalAlignment="Center" Margin="0,0,0,18"/>
+                <Separator Margin="0,0,0,12"/>
+                <StackPanel x:Name="ResultadosPanel" Margin="0,0,0,10"/>
+                <Separator Margin="0,10,0,10"/>
+                <Button Content="Cerrar" Width="110" Height="36" Background="#1976D2" Foreground="White"
+                    FontWeight="Bold" HorizontalAlignment="Center" Click="BtnCerrar_Click"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
