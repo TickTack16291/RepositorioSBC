@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LoginDeAbarrotech"
         mc:Ignorable="d"
-        Title="LoginAbarrotech" Height="600" Width="850"  WindowStartupLocation="CenterScreen">
+        Title="LoginAbarrotech" Height="680" Width="850"  WindowStartupLocation="CenterScreen">
 
     <!-- Grid es el contenedor principal que organiza los elementos -->
     <Grid x:Name="Login_Abarrotech" Margin="0,0,0,-90">
@@ -17,14 +17,22 @@
             </LinearGradientBrush>
         </Grid.Background>
 
-        <!--Contenedor blanco para los componentes-->
-        <Border Background="White" CornerRadius="20" Padding="30" Width="380" Height="484"
+        <!--Contenedor blanco para los componentes ampliado-->
+        <Border Background="White" CornerRadius="20" Padding="30" Width="380" Height="560"
             HorizontalAlignment="Center" VerticalAlignment="Center">
             <Border.Effect>
                 <DropShadowEffect Color="Black" BlurRadius="15" ShadowDepth="5"/>
             </Border.Effect>
             <StackPanel>
                 <StackPanel>
+                    <!-- LOGO UAEH AGREGADO -->
+                    <Image Source="/Recursos/UaehLogo.png" 
+                           Width="70" 
+                           Height="70" 
+                           HorizontalAlignment="Center" 
+                           Margin="0,0,0,10"
+                           Stretch="Uniform"/>
+                    
                     <TextBlock Text="Orientación Vocacional" FontSize="22" FontWeight="Bold" 
                            Foreground="#1565C0" HorizontalAlignment="Center" Margin="0,0,0,20"/>
                 </StackPanel>
@@ -139,7 +147,7 @@
                         </Button.Triggers>
                     </Button>
 
-                    <!-- NUEVO BOTÓN: Ver Información de Usuarios -->
+                    <!-- BOTÓN: Ver Información de Usuarios -->
                     <Button x:Name="btnVerUsuarios" Content="Ver Información de Usuarios" Background="#FF5722" Foreground="White"
                         Height="40" FontWeight="Bold" Margin="0,10,0,0" Click="btnVerUsuarios_Click">
                         <Button.Style>
