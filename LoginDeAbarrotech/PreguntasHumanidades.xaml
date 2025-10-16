@@ -18,7 +18,7 @@
 
         <!-- Título -->
         <TextBlock Grid.Row="0" 
-             Text="Cuestionario - Conociendo Áreas" 
+             Text="Cuestionario - Humanidades" 
              FontSize="16" 
              FontWeight="Bold" 
              HorizontalAlignment="Center" 

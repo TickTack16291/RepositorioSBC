@@ -18,7 +18,7 @@
 
         <!-- Título -->
         <TextBlock Grid.Row="0" 
-         Text="Cuestionario -Preguntas Ciencias Naturales" 
+         Text="Cuestionario - Ciencias Naturales" 
          FontSize="16" 
          FontWeight="Bold" 
          HorizontalAlignment="Center" 
